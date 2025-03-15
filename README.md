@@ -22,5 +22,3 @@ Welcome to my personal portfolio website! It reflects my experience in web devel
 -   **Icon8**: For Icons.
 -   **Google Font**: For attractive icons.
 
-## Installation
-
