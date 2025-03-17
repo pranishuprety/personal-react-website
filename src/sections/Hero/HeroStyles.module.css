@@ -69,14 +69,20 @@
 }
 
 .description {
-	max-width: 33ch;
+    max-width: 33ch;
+    text-align: center;
+    margin: 0 auto; 
 }
 
+
 .info {
-	display: flex;
-	flex-direction: column;
-	gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
 }
+
 
 @media (width >= 900px) {
 	.container {
