@@ -7,7 +7,7 @@ import githubDark from '../../assets/github-dark.svg';
 import linkedinLight from '../../assets/linkedin-light.svg';
 import linkedinDark from '../../assets/linkedin-dark.svg';
 import emailLight from '../../assets/email-light.svg';
-import emailDark from '../../assets/email-dark.svg';
+import emailDark from '../../assets/email-dark.png';
 import CV from '../../assets/cv.pdf';
 import { useTheme } from '../../common/ThemeContext';
 
