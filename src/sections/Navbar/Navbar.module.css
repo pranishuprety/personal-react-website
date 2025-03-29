@@ -1,0 +1,35 @@
+/* Navbar.module.css */
+.navbar {
+  position: fixed; /* Fixed position to stay at the top */
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f8f8f8; /* Example background color */
+  padding: 10px 0;
+  z-index: 1000; /* Ensure it's on top of other content */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow for depth */
+}
+
+.navList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center; /* Center the navigation items */
+}
+
+.navItem {
+  margin: 0 15px; /* Spacing between nav items */
+}
+
+.navLink {
+  text-decoration: none;
+  color: #333; /* Example link color */
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.navLink:hover {
+  color: #007bff; /* Example hover color */
+}
