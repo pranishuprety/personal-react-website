@@ -3,6 +3,7 @@ import soccerhub from '../../assets/soccerhub.png';
 import pranish from '../../assets/pranish.png';
 import ProjectCard from '../../common/ProjectCard';
 import dogBreedFinder from '../../assets/dog-breed-finder.png';
+import projectDristi from '../../assets/dristi.png';
 
 function Projects() {
 	return (
@@ -12,6 +13,7 @@ function Projects() {
 				<ProjectCard src={soccerhub} link="https://pranishuprety.github.io/soccerhub/" name="SoccerHub" desc="Tracks live soccer scores, upcoming matches, and stats for top leagues in real time." />
 				<ProjectCard src={pranish} link="https://github.com/pranishuprety/portfolio-website" name="Personal Website" desc="Showcases my projects and skills with a clean and responsive design. Built using JavaScript, React, and Bootstrap, powered by Vite." />
 				<ProjectCard src={dogBreedFinder} link="https://pranishuprety.github.io/dogbreedfinder/" name="Dog Breed Finder" desc="Fetches random images of selected dog breeds every 5 seconds." />
+				<ProjectCard src={projectDristi} link="http://bit.ly/3R0Xiud" name="Project Dristi" desc="Group project built in HackPrinceton - Spring 2025. A smart cane with the fusion of AI and IoT" />
 			</div>
 		</section>
 	);
