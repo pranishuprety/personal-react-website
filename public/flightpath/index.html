@@ -550,37 +550,64 @@ function buildRidgeHeightmap(corridor) {
   const originM = corridor.origin.elevFt      * METERS_PER_FOOT;
   const destM   = corridor.destination.elevFt * METERS_PER_FOOT;
   const passRatio = corridor.passRatio;
-  // origin west, destination east
+  // path runs west → east; crossing ridge runs north–south at u ≈ 0.5
   const ox = 0.14, oy = 0.50;
   const dx = 0.86, dy = 0.50;
 
   for (let j = 0; j < N; j++) {
     for (let i = 0; i < N; i++) {
       const u = i / (N - 1), v = j / (N - 1);
-      const base = fbm(u * 4.2, v * 4.2, seed, 5);
-      // ridge band at u = 0.5 running N–S
-      const ridgeDist = Math.abs(u - 0.5);
-      const ridgeBand = Math.exp(-Math.pow(ridgeDist / 0.10, 2));
-      // local ridge height varies with v — creates passes (low spots) and peaks
-      const passMod = fbm(v * 2.6, seed * 0.013, seed + 511, 4);
-      const localRidge = (passRatio + (1 - passRatio) * passMod) * ridgeM;
-      // approach flanks
-      const flankShape = Math.exp(-Math.pow(ridgeDist / 0.32, 2));
-      // origin/destination basins (bring local elevation to airport elevations)
+
+      // Multi-octave mountain terrain — rolling relief everywhere
+      const big    = fbm(u * 2.4, v * 2.4, seed,        4);
+      const mid    = fbm(u * 5.0, v * 5.0, seed + 313,  4);
+      const fine   = fbm(u * 10.0, v * 10.0, seed + 577, 3);
+      const peaky  = fbm(u * 3.2, v * 3.5, seed + 881,  3);
+
+      // Base rolling-mountain field, ranging roughly 0.30–0.80 of ridgeM.
+      const baseField = 0.34 + 0.30 * big + 0.16 * mid + 0.10 * fine + 0.12 * peaky;
+
+      // Background parallel ridges to the north and south of the corridor —
+      // pure aesthetics, they make the scene read as a range rather than a
+      // lone mountain. They do NOT block the east-west flight path.
+      const northV = 0.86 + 0.035 * Math.sin(u * Math.PI * 2.2 + seed * 0.007);
+      const southV = 0.14 + 0.035 * Math.cos(u * Math.PI * 2.6);
+      const northBand = Math.exp(-Math.pow((v - northV) / 0.10, 2));
+      const southBand = Math.exp(-Math.pow((v - southV) / 0.11, 2));
+      const frameBoost = northBand * 0.22 + southBand * 0.18;
+
+      // Gentle corridor valley along v = 0.5 (pulls non-ridge terrain down).
+      const corridorValley = Math.exp(-Math.pow((v - 0.5) / 0.14, 2)) * 0.10;
+
+      // The crossing ridge at u ≈ 0.5 that the flight path MUST traverse.
+      const xRidgeU = 0.50 + 0.04 * Math.sin(v * Math.PI * 2.0 + seed * 0.011);
+      const xRidgeDist = Math.abs(u - xRidgeU);
+      const xRidgeBand = Math.exp(-Math.pow(xRidgeDist / 0.10, 2));
+      // Along the ridge, height modulates between passRatio*ridgeM (passes)
+      // and 1.0*ridgeM (peaks), driven by noise along v.
+      const passMod = fbm(v * 2.9, seed * 0.013, seed + 511, 4);
+      const xRidgeTarget = (passRatio + (1 - passRatio) * passMod) * ridgeM;
+
+      // Assemble base mountain height in meters.
+      let baseHeight = Math.min(baseField + frameBoost, 0.82) * ridgeM;
+      // Carve the corridor valley where the crossing ridge doesn't dominate.
+      baseHeight -= corridorValley * ridgeM * (1 - xRidgeBand * 0.65);
+      baseHeight = Math.max(baseHeight, 400);
+
+      // Crossing ridge: lerp the height UP to the ridge target where the
+      // ridge is present. Produces prominent but range-integrated ridge.
+      let h = baseHeight + xRidgeBand * Math.max(0, xRidgeTarget - baseHeight);
+
+      // Airport basins: carve local depressions so origin/destination sit at
+      // realistic airport elevations rather than on a hilltop.
       const dO = Math.hypot(u - ox, v - oy);
       const dD = Math.hypot(u - dx, v - dy);
-      const basinO = Math.exp(-Math.pow(dO / 0.10, 2));
-      const basinD = Math.exp(-Math.pow(dD / 0.10, 2));
+      const basinO = Math.exp(-Math.pow(dO / 0.095, 2));
+      const basinD = Math.exp(-Math.pow(dD / 0.095, 2));
+      h = h * (1 - 0.94 * basinO) + originM * basinO;
+      h = h * (1 - 0.94 * basinD) + destM   * basinD;
 
-      let h = 0;
-      h += base * 0.30 * ridgeM;
-      h += ridgeBand * localRidge * 0.90;
-      h += flankShape * ridgeM * 0.20;
-
-      h = h * (1 - 0.92 * basinO) + originM * basinO;
-      h = h * (1 - 0.92 * basinD) + destM   * basinD;
-      h = Math.max(h, 600);
-      hm[j * N + i] = h;
+      hm[j * N + i] = Math.max(h, 500);
     }
   }
   return {
