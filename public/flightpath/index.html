@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FlightPath — Terrain-Aware Navigation over the Himalayas</title>
-<meta name="description" content="Interactive demo of a terrain-aware flight path simulator for Nepal's Himalayan corridors. Research Day 2026 — Pranish Uprety." />
+<title>FlightPath: Terrain-Aware Navigation over the Himalayas</title>
+<meta name="description" content="Interactive demo of a terrain-aware flight path simulator for Nepal's Himalayan corridors. Research Day 2026: Pranish Uprety." />
+<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 <style>
   :root {
     --bg: #0b1020;
@@ -260,13 +261,8 @@
 
   <div class="header">
     <div class="title">
-      <h1>Flight<span class="accent">Path</span> — Terrain-Aware Navigation Demo</h1>
+      <h1>Flight<span class="accent">Path</span>: Terrain-Aware Navigation Demo</h1>
       <p>Pranish Uprety · Advisor: Dr. Vladislav Veksler · Caldwell University · Research Day 2026</p>
-      <div class="badges">
-        <span class="badge">NASA SRTM-3 · Three.js r160</span>
-        <span class="badge">A* · Dijkstra pathfinding</span>
-        <span class="badge">4 Himalayan corridors · 4 aircraft</span>
-      </div>
     </div>
   </div>
 
@@ -314,14 +310,14 @@
 
   <div class="panel metrics">
     <h3>Flight Analysis</h3>
-    <div class="metric"><span class="k">Great-circle distance</span><span class="v" id="m-direct">—</span></div>
-    <div class="metric"><span class="k">Planned distance</span><span class="v" id="m-planned">—</span></div>
-    <div class="metric"><span class="k">Route adjustment</span><span class="v" id="m-adjust">—</span></div>
-    <div class="metric"><span class="k">Max terrain on path</span><span class="v" id="m-maxterrain">—</span></div>
-    <div class="metric"><span class="k">Min terrain clearance</span><span class="v" id="m-clearance">—</span></div>
-    <div class="metric"><span class="k">Hazard zones on path</span><span class="v" id="m-hazards">—</span></div>
-    <div class="metric"><span class="k">Cruise altitude (est.)</span><span class="v" id="m-cruise">—</span></div>
-    <div class="metric"><span class="k">Aircraft ceiling</span><span class="v" id="m-ceiling">—</span></div>
+    <div class="metric"><span class="k">Great-circle distance</span><span class="v" id="m-direct">-</span></div>
+    <div class="metric"><span class="k">Planned distance</span><span class="v" id="m-planned">-</span></div>
+    <div class="metric"><span class="k">Route adjustment</span><span class="v" id="m-adjust">-</span></div>
+    <div class="metric"><span class="k">Max terrain on path</span><span class="v" id="m-maxterrain">-</span></div>
+    <div class="metric"><span class="k">Min terrain clearance</span><span class="v" id="m-clearance">-</span></div>
+    <div class="metric"><span class="k">Hazard zones on path</span><span class="v" id="m-hazards">-</span></div>
+    <div class="metric"><span class="k">Cruise altitude (est.)</span><span class="v" id="m-cruise">-</span></div>
+    <div class="metric"><span class="k">Aircraft ceiling</span><span class="v" id="m-ceiling">-</span></div>
     <div class="verdict" id="verdict">Select a corridor and press Compute Route</div>
   </div>
 
@@ -344,7 +340,7 @@
   <div class="modal-backdrop" id="summary-modal">
     <div class="summary-panel">
       <button class="close" id="summary-close" aria-label="Close">×</button>
-      <h2>Research Day 2026 — Validated Results</h2>
+      <h2>Research Day 2026: Validated Results</h2>
       <p class="sub">Flight Path Simulation and Terrain-Aware Navigation System for Mountainous Airspaces · Uprety &amp; Veksler, Caldwell University</p>
 
       <div class="stat-grid">
@@ -1143,12 +1139,12 @@ function loadCorridor() {
   renderCorridorInfo(corridor);
 
   ui.m.direct.textContent = fmtKm(corridor.directKm);
-  ui.m.planned.textContent = '—';
-  ui.m.adjust.textContent = '—';
-  ui.m.maxterrain.textContent = '—';
-  ui.m.clearance.textContent = '—';
-  ui.m.hazards.textContent = '—';
-  ui.m.cruise.textContent = '—';
+  ui.m.planned.textContent = '-';
+  ui.m.adjust.textContent = '-';
+  ui.m.maxterrain.textContent = '-';
+  ui.m.clearance.textContent = '-';
+  ui.m.hazards.textContent = '-';
+  ui.m.cruise.textContent = '-';
   ui.m.ceiling.textContent = AIRCRAFT[ui.aircraft.value].ceiling.toLocaleString() + ' ft';
   ui.verdict.className = 'verdict';
   ui.verdict.textContent = 'Press Compute Route to plan flight';

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#0b1020"/>
+  <!-- mountain range -->
+  <path d="M2 27 L10 13 L15 19 L22 7 L30 27 Z" fill="#5cc8ff"/>
+  <!-- snow caps -->
+  <path d="M8.6 15.5 L10 13 L11.6 15.5 Z" fill="#e6ecff"/>
+  <path d="M20.3 10 L22 7 L23.8 10 Z" fill="#e6ecff"/>
+  <!-- flight path arc -->
+  <path d="M3.5 23 Q16 3 28.5 23" stroke="#ffcf5c" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <!-- aircraft marker -->
+  <circle cx="28.5" cy="23" r="1.9" fill="#ffcf5c"/>
+  <circle cx="3.5" cy="23" r="1.5" fill="#4ade80"/>
+</svg>
