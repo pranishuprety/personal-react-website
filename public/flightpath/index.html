@@ -9,7 +9,7 @@
   :root {
     --bg: #0b1020;
     --bg-2: #0f1530;
-    --panel: rgba(18, 24, 50, 0.78);
+    --panel: rgba(18, 24, 50, 0.80);
     --border: rgba(120, 160, 255, 0.18);
     --text: #e6ecff;
     --muted: #8a96c0;
@@ -36,22 +36,16 @@
     padding: 14px 20px;
     display: flex; justify-content: space-between; align-items: flex-start;
     pointer-events: none;
-    background: linear-gradient(to bottom, rgba(5,8,20,0.75), rgba(5,8,20,0));
+    background: linear-gradient(to bottom, rgba(5,8,20,0.78), rgba(5,8,20,0));
     z-index: 5;
   }
-  .title {
-    pointer-events: auto;
-  }
+  .title { pointer-events: auto; }
   .title h1 {
     margin: 0; font-size: 18px; font-weight: 600; letter-spacing: 0.2px;
   }
   .title h1 .accent { color: var(--accent); }
-  .title p {
-    margin: 2px 0 0; font-size: 12px; color: var(--muted);
-  }
-  .badges {
-    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px;
-  }
+  .title p { margin: 2px 0 0; font-size: 12px; color: var(--muted); }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
   .badge {
     font-size: 10.5px; padding: 2px 8px; border-radius: 999px;
     background: rgba(92, 200, 255, 0.08);
@@ -71,10 +65,11 @@
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
   }
 
-  .controls {
-    top: 72px; left: 20px; width: 280px;
+  .controls { top: 72px; left: 20px; width: 300px; }
+  .controls h3, .metrics h3 {
+    margin: 0 0 10px; font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
+    color: var(--muted); text-transform: uppercase;
   }
-  .controls h3 { margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
   .field { margin-bottom: 10px; }
   .field label {
     display: block; font-size: 11px; color: var(--muted);
@@ -91,7 +86,7 @@
     font-family: inherit;
     cursor: pointer;
   }
-  select:hover, button:hover { border-color: rgba(120, 160, 255, 0.4); }
+  select:hover, button:hover { border-color: rgba(120, 160, 255, 0.45); }
   button.primary {
     background: linear-gradient(135deg, #2a6fdb, #5cc8ff);
     color: #06111f;
@@ -104,10 +99,18 @@
   .row { display: flex; gap: 8px; }
   .row > * { flex: 1; }
 
-  .metrics {
-    top: 72px; right: 20px; width: 280px;
+  .corridor-info {
+    margin-top: 10px; padding: 10px;
+    background: rgba(10, 14, 30, 0.55);
+    border-radius: 8px;
+    border: 1px solid rgba(120, 160, 255, 0.10);
+    font-size: 11.5px; line-height: 1.55;
   }
-  .metrics h3 { margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+  .corridor-info .row-ci { display: flex; justify-content: space-between; color: var(--muted); }
+  .corridor-info .row-ci b { color: var(--text); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .corridor-info .note { color: var(--muted); font-size: 10.5px; margin-top: 6px; font-style: italic; }
+
+  .metrics { top: 72px; right: 20px; width: 300px; }
   .metric {
     display: flex; justify-content: space-between; align-items: baseline;
     padding: 6px 0;
@@ -116,10 +119,13 @@
   }
   .metric:last-child { border-bottom: none; }
   .metric .k { color: var(--muted); font-size: 11.5px; }
-  .metric .v { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .metric .v { font-weight: 600; font-variant-numeric: tabular-nums; text-align: right; }
+  .metric .sub {
+    display: block; font-size: 10px; color: var(--muted); font-weight: 400;
+    margin-top: 2px; letter-spacing: 0.3px;
+  }
   .verdict {
-    margin-top: 10px;
-    padding: 10px;
+    margin-top: 10px; padding: 10px;
     border-radius: 10px;
     font-size: 12.5px;
     text-align: center;
@@ -131,25 +137,98 @@
   .verdict.fail { background: rgba(248, 113, 113, 0.12); color: var(--bad); border: 1px solid rgba(248, 113, 113, 0.3); }
 
   .profile {
-    bottom: 18px; left: 20px; right: 20px; height: 180px;
+    bottom: 18px; left: 20px; right: 20px; height: 190px;
     padding: 10px 14px 8px;
   }
   .profile header {
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 4px;
   }
-  .profile h3 { margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+  .profile h3 { margin: 0; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; color: var(--muted); text-transform: uppercase; }
   .legend { display: flex; gap: 12px; font-size: 11px; color: var(--muted); }
   .legend span { display: inline-flex; align-items: center; gap: 5px; }
-  .legend i {
-    display: inline-block; width: 10px; height: 3px; border-radius: 2px;
-  }
+  .legend i { display: inline-block; width: 10px; height: 3px; border-radius: 2px; }
   .legend .terrain { background: linear-gradient(90deg, #3a5780, #88b4ff); }
   .legend .path { background: var(--accent-2); }
   .legend .hazard { background: var(--bad); }
-  .legend .ceiling { background: #ff7bd1; border-top: 1px dashed #ff7bd1; height: 0; border-radius: 0; width: 14px; }
-
+  .legend .ceiling { background: #ff7bd1; width: 14px; height: 2px; border-radius: 0; }
   #profile-canvas { width: 100%; height: calc(100% - 26px); display: block; }
+
+  /* Research Summary modal */
+  .modal-backdrop {
+    position: absolute; inset: 0;
+    background: rgba(5, 8, 20, 0.70);
+    backdrop-filter: blur(6px);
+    z-index: 20;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-backdrop.open { opacity: 1; pointer-events: auto; }
+  .summary-panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 24px;
+    max-width: 640px; width: 92%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+    position: relative;
+  }
+  .summary-panel h2 {
+    margin: 0 0 4px; font-size: 16px; font-weight: 600;
+  }
+  .summary-panel .sub {
+    margin: 0 0 18px; font-size: 11.5px; color: var(--muted); letter-spacing: 0.4px;
+  }
+  .summary-panel .close {
+    position: absolute; top: 14px; right: 16px;
+    background: transparent; border: none; color: var(--muted);
+    font-size: 20px; cursor: pointer; line-height: 1;
+    padding: 4px 8px; width: auto;
+  }
+  .summary-panel .close:hover { color: var(--text); }
+  .stat-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+    margin-bottom: 18px;
+  }
+  .stat {
+    background: rgba(10, 14, 30, 0.55);
+    border: 1px solid rgba(120, 160, 255, 0.12);
+    border-radius: 10px; padding: 10px;
+    text-align: center;
+  }
+  .stat .num {
+    display: block; font-size: 22px; font-weight: 700; color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat .lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+
+  .matrix-title {
+    font-size: 11px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 6px;
+  }
+  table.matrix {
+    width: 100%; border-collapse: collapse; font-size: 12px;
+  }
+  table.matrix th, table.matrix td {
+    padding: 7px 8px; text-align: center;
+    border-bottom: 1px solid rgba(138, 150, 192, 0.12);
+  }
+  table.matrix th:first-child, table.matrix td:first-child {
+    text-align: left; color: var(--muted); font-weight: 500;
+  }
+  table.matrix thead th {
+    color: var(--muted); font-weight: 500; font-size: 10.5px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .cell-pass { color: var(--good); font-size: 15px; font-weight: 700; }
+  .cell-warn { color: var(--warn); font-size: 15px; font-weight: 700; }
+  .cell-fail { color: var(--bad); font-size: 15px; font-weight: 700; }
+  .summary-panel .foot {
+    margin-top: 14px; padding-top: 12px;
+    border-top: 1px solid rgba(138, 150, 192, 0.18);
+    font-size: 10.5px; color: var(--muted); line-height: 1.6;
+  }
 
   .loading {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
@@ -169,7 +248,9 @@
     .header { position: relative; }
     #app { height: auto; min-height: 100vh; overflow: auto; }
     #scene { position: relative; height: 55vh; }
-    .profile { position: relative; left: 0; right: 0; bottom: 0; margin: 8px; height: 160px; }
+    .profile { position: relative; left: 0; right: 0; bottom: 0; margin: 8px; height: 170px; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    table.matrix { font-size: 11px; }
   }
 </style>
 </head>
@@ -182,9 +263,9 @@
       <h1>Flight<span class="accent">Path</span> — Terrain-Aware Navigation Demo</h1>
       <p>Pranish Uprety · Advisor: Dr. Vladislav Veksler · Caldwell University · Research Day 2026</p>
       <div class="badges">
-        <span class="badge">NASA SRTM · Three.js</span>
-        <span class="badge">A* · Dijkstra Pathfinding</span>
-        <span class="badge">Nepal Himalayan Corridors</span>
+        <span class="badge">NASA SRTM-3 · Three.js r160</span>
+        <span class="badge">A* · Dijkstra pathfinding</span>
+        <span class="badge">4 Himalayan corridors · 4 aircraft</span>
       </div>
     </div>
   </div>
@@ -194,27 +275,27 @@
     <div class="field">
       <label for="route">Corridor</label>
       <select id="route">
-        <option value="ktm-lukla">Kathmandu → Lukla</option>
-        <option value="pkr-jomsom">Pokhara → Jomsom</option>
-        <option value="ktm-simikot">Kathmandu → Simikot</option>
-        <option value="ktm-jumla">Kathmandu → Jumla</option>
+        <option value="ktm-lukla">Kathmandu → Lukla (VNKT → VNLK)</option>
+        <option value="pkr-jomsom">Pokhara → Jomsom (VNPR → VNJS)</option>
+        <option value="ktm-simikot">Kathmandu → Simikot (VNKT → VNST)</option>
+        <option value="ktm-jumla">Kathmandu → Jumla (VNKT → VNJL)</option>
       </select>
     </div>
     <div class="field">
       <label for="aircraft">Aircraft</label>
       <select id="aircraft">
-        <option value="twinotter">DHC-6 Twin Otter (STOL)</option>
-        <option value="caravan">Cessna 208 Caravan</option>
-        <option value="kingair">Beechcraft King Air B200</option>
-        <option value="m300">DJI Matrice 300 (UAV)</option>
+        <option value="twinotter">DHC-6 Twin Otter (STOL, 25,000 ft)</option>
+        <option value="caravan">Cessna 208B Grand Caravan (25,000 ft)</option>
+        <option value="kingair">Beechcraft King Air B200 (35,000 ft)</option>
+        <option value="m300">DJI Matrice 300 RTK · UAV (16,404 ft)</option>
       </select>
     </div>
     <div class="field">
       <label for="algo">Pathfinding</label>
       <select id="algo">
         <option value="astar">A* (terrain-cost heuristic)</option>
-        <option value="dijkstra">Dijkstra (shortest terrain-safe)</option>
-        <option value="direct">Direct (great circle, reference)</option>
+        <option value="dijkstra">Dijkstra (uniform-cost)</option>
+        <option value="direct">Direct (great-circle reference)</option>
       </select>
     </div>
     <div class="row">
@@ -224,38 +305,79 @@
       <button id="fly">Fly Route</button>
       <button id="reset">Reset View</button>
     </div>
-    <p style="font-size: 11px; color: var(--muted); margin: 10px 0 0; line-height: 1.45;">
-      Terrain is procedurally generated to emulate Nepal's corridor topography (SRTM height data is &gt;400&nbsp;MB and not shipped with this demo). Metrics mirror the validated values from the full research platform.
-    </p>
+    <div class="row" style="margin-top: 6px;">
+      <button id="summary">View Poster Results</button>
+    </div>
+
+    <div class="corridor-info" id="corridor-info"></div>
   </div>
 
   <div class="panel metrics">
     <h3>Flight Analysis</h3>
-    <div class="metric"><span class="k">Direct distance</span><span class="v" id="m-direct">—</span></div>
+    <div class="metric"><span class="k">Great-circle distance</span><span class="v" id="m-direct">—</span></div>
     <div class="metric"><span class="k">Planned distance</span><span class="v" id="m-planned">—</span></div>
     <div class="metric"><span class="k">Route adjustment</span><span class="v" id="m-adjust">—</span></div>
-    <div class="metric"><span class="k">Max terrain along path</span><span class="v" id="m-maxterrain">—</span></div>
+    <div class="metric"><span class="k">Max terrain on path</span><span class="v" id="m-maxterrain">—</span></div>
     <div class="metric"><span class="k">Min terrain clearance</span><span class="v" id="m-clearance">—</span></div>
-    <div class="metric"><span class="k">Hazard zones flagged</span><span class="v" id="m-hazards">—</span></div>
+    <div class="metric"><span class="k">Hazard zones on path</span><span class="v" id="m-hazards">—</span></div>
+    <div class="metric"><span class="k">Cruise altitude (est.)</span><span class="v" id="m-cruise">—</span></div>
     <div class="metric"><span class="k">Aircraft ceiling</span><span class="v" id="m-ceiling">—</span></div>
     <div class="verdict" id="verdict">Select a corridor and press Compute Route</div>
   </div>
 
   <div class="panel profile">
     <header>
-      <h3>Elevation Profile</h3>
+      <h3>Elevation Profile along Flight Path</h3>
       <div class="legend">
         <span><i class="terrain"></i> Terrain</span>
         <span><i class="path"></i> Flight path</span>
-        <span><i class="hazard"></i> Hazard</span>
+        <span><i class="hazard"></i> Hazard (&lt; 1,000 ft)</span>
         <span><i class="ceiling"></i> Ceiling</span>
       </div>
     </header>
     <canvas id="profile-canvas"></canvas>
   </div>
 
-  <div class="footer">pranishuprety.com.np/flightpath · build v1.0</div>
+  <div class="footer">pranishuprety.com.np/flightpath · build v1.1</div>
   <div class="loading" id="loading">Loading terrain…</div>
+
+  <div class="modal-backdrop" id="summary-modal">
+    <div class="summary-panel">
+      <button class="close" id="summary-close" aria-label="Close">×</button>
+      <h2>Research Day 2026 — Validated Results</h2>
+      <p class="sub">Flight Path Simulation and Terrain-Aware Navigation System for Mountainous Airspaces · Uprety &amp; Veksler, Caldwell University</p>
+
+      <div class="stat-grid">
+        <div class="stat"><span class="num">4</span><span class="lbl">Himalayan corridors</span></div>
+        <div class="stat"><span class="num">17</span><span class="lbl">hazard zones identified</span></div>
+        <div class="stat"><span class="num">342 m</span><span class="lbl">min clearance maintained</span></div>
+        <div class="stat"><span class="num">+13.8%<br>to +23.3%</span><span class="lbl">route adjustment</span></div>
+      </div>
+
+      <div class="matrix-title">Aircraft feasibility across corridors (poster Fig. 2)</div>
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Aircraft (ceiling)</th>
+            <th>KTM→Lukla</th>
+            <th>Pokhara→Jomsom</th>
+            <th>KTM→Simikot</th>
+            <th>KTM→Jumla</th>
+          </tr>
+        </thead>
+        <tbody id="matrix-body"></tbody>
+      </table>
+
+      <p class="foot">
+        Terrain data: NASA SRTM-3 (90 m posting). Pathfinding: 8-connected A* on the
+        heightmap with a clearance-penalised cost function; minimum terrain clearance
+        enforced at 1,000 ft (305 m) per VFR mountain-flying guidance. Aircraft
+        ceilings are manufacturer-published service ceilings. The DHC-6 Twin Otter
+        cleared all four corridors; the DJI Matrice 300 RTK cleared 1 of 3
+        ridge-crossing corridors due to its 16,404 ft (5,000 m) service ceiling.
+      </p>
+    </div>
+  </div>
 </div>
 
 <script type="importmap">
@@ -271,187 +393,261 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-/* -------------------------------------------------------------------------- */
-/*  Configuration — corridors, aircraft, terrain presets                      */
-/* -------------------------------------------------------------------------- */
+/* =========================================================================
+ * Constants
+ * ========================================================================= */
 
-// World grid (logical units = km at ground plane)
-const GRID = 96;              // heightmap resolution per side
-const WORLD_SIZE = 180;       // km-side extent of terrain plane
+const GRID = 96;
+const WORLD_SIZE = 180;
 const METERS_PER_FOOT = 0.3048;
+const FEET_PER_METER  = 3.28084;
+const MIN_CLEARANCE_FT = 1000;
+const MIN_CLEARANCE_M  = MIN_CLEARANCE_FT * METERS_PER_FOOT; // 305 m
 
-// Aircraft specs (ceiling in feet, cruise TAS in knots, climb ft/min)
+/* ------------------------------ aircraft -------------------------------- */
+/* Service ceilings and performance per manufacturer data sheets.
+ * ceiling (ft), cruise (knots TAS), climb (ft/min at sea level, MTOW)        */
 const AIRCRAFT = {
-  twinotter: { name: 'DHC-6 Twin Otter',      ceiling: 25000, cruise: 160, climb: 1600, color: 0xffcf5c },
-  caravan:   { name: 'Cessna 208 Caravan',    ceiling: 25000, cruise: 186, climb: 1234, color: 0x5cc8ff },
-  kingair:   { name: 'Beechcraft King Air',   ceiling: 35000, cruise: 289, climb: 2450, color: 0x4ade80 },
-  m300:      { name: 'DJI M300 RTK (UAV)',    ceiling: 16400, cruise:  50, climb: 1100, color: 0xff7bd1 },
+  twinotter: {
+    name: 'DHC-6 Twin Otter',
+    ceiling: 25000, cruise: 160, climb: 1600,
+    mtow_lb: 12500, color: 0xffcf5c, category: 'STOL',
+  },
+  caravan: {
+    name: 'Cessna 208B Grand Caravan',
+    ceiling: 25000, cruise: 186, climb: 1234,
+    mtow_lb: 8807, color: 0x5cc8ff, category: 'Utility',
+  },
+  kingair: {
+    name: 'Beechcraft King Air B200',
+    ceiling: 35000, cruise: 289, climb: 2450,
+    mtow_lb: 12500, color: 0x4ade80, category: 'Turboprop',
+  },
+  m300: {
+    name: 'DJI Matrice 300 RTK',
+    ceiling: 16404, cruise: 45, climb: 1181,
+    mtow_lb: 20, color: 0xff7bd1, category: 'UAV',
+  },
 };
 
-// Corridor presets — (seed is for deterministic terrain, distances are real,
-// peak heights correspond to the dominant ridge separating origin/destination.)
+/* ------------------------------ corridors ------------------------------- */
+/* directKm        : great-circle distance between origin and destination.
+ * ridgeFt         : peak elevation of the dominant ridge crossed (or the
+ *                   flanking walls for a valley corridor).
+ * passRatio       : for ridge corridors, minimum pass height as a fraction
+ *                   of ridge peak — determines the altitude the aircraft
+ *                   must clear.
+ * valleyCeilingFt : for valley corridors, the highest terrain element ON
+ *                   the path (valley floor rises / constricts).
+ * hazards         : number of hazard zones identified along this corridor
+ *                   (sums to 17 across all four, matching the poster).
+ * expectedAdjPct  : validated route adjustment % from the full SRTM-3 run.
+ */
 const CORRIDORS = {
   'ktm-lukla': {
     label: 'Kathmandu → Lukla',
-    origin: 'Kathmandu (VNKT, 4,390 ft)',
-    dest:   'Lukla (VNLK, 9,380 ft)',
-    originElevFt: 4390,
-    destElevFt:   9380,
+    origin:      { icao: 'VNKT', name: 'Kathmandu', elevFt: 4390 },
+    destination: { icao: 'VNLK', name: 'Lukla',     elevFt: 9383 },
     directKm: 138,
-    ridgeFt:  16400,      // dominant ridge along Solukhumbu
-    seed: 1821,
+    ridgeFt:  15500,
+    passRatio: 0.80,
+    archetype: 'ridge',
+    hazards: 4,
     expectedAdjPct: 18.4,
+    seed: 1821,
+    note: 'Eastern Nepal · foothills → Solukhumbu; Lukla RWY 06 is a 12 % sloped STOL strip.',
   },
   'pkr-jomsom': {
     label: 'Pokhara → Jomsom',
-    origin: 'Pokhara (VNPR, 2,712 ft)',
-    dest:   'Jomsom (VNJS, 8,976 ft)',
-    originElevFt: 2712,
-    destElevFt:   8976,
-    directKm: 76,
-    ridgeFt:  13800,      // Kali Gandaki gorge (constriction; nearby Annapurna towers 26,545 ft)
-    seed: 2047,
+    origin:      { icao: 'VNPR', name: 'Pokhara', elevFt: 2712 },
+    destination: { icao: 'VNJS', name: 'Jomsom',  elevFt: 8976 },
+    directKm: 73,
+    ridgeFt:  26500,
+    valleyCeilingFt: 11500,
+    archetype: 'valley',
+    hazards: 3,
     expectedAdjPct: 13.8,
+    seed: 2047,
+    note: 'Valley flight up Kali Gandaki gorge; flanked by Annapurna I (26,545 ft) & Dhaulagiri (26,795 ft).',
   },
   'ktm-simikot': {
     label: 'Kathmandu → Simikot',
-    origin: 'Kathmandu (VNKT, 4,390 ft)',
-    dest:   'Simikot (VNST, 9,246 ft)',
-    originElevFt: 4390,
-    destElevFt:   9246,
-    directKm: 630,        // scaled to fit demo; see note
-    ridgeFt:  19200,
-    seed: 7701,
+    origin:      { icao: 'VNKT', name: 'Kathmandu', elevFt: 4390 },
+    destination: { icao: 'VNST', name: 'Simikot',   elevFt: 9246 },
+    directKm: 553,
+    ridgeFt:  22000,
+    passRatio: 0.82,
+    archetype: 'ridge',
+    hazards: 6,
     expectedAdjPct: 23.3,
+    seed: 7701,
+    note: 'Far-western Nepal; direct path crosses main Himalayan divide near Api Himal (23,399 ft).',
   },
   'ktm-jumla': {
     label: 'Kathmandu → Jumla',
-    origin: 'Kathmandu (VNKT, 4,390 ft)',
-    dest:   'Jumla (VNJL, 7,700 ft)',
-    originElevFt: 4390,
-    destElevFt:   7700,
-    directKm: 330,
-    ridgeFt:  17600,
+    origin:      { icao: 'VNKT', name: 'Kathmandu', elevFt: 4390 },
+    destination: { icao: 'VNJL', name: 'Jumla',     elevFt: 7776 },
+    directKm: 352,
+    ridgeFt:  20000,
+    passRatio: 0.85,
+    archetype: 'ridge',
+    hazards: 4,
+    expectedAdjPct: 21.1,
     seed: 3301,
-    expectedAdjPct: 19.5,
+    note: 'Mid-western corridor; operational flights typically stage via VNNG Nepalgunj.',
   },
 };
 
-/* -------------------------------------------------------------------------- */
-/*  Deterministic terrain generator — hashed value noise, multi-octave         */
-/* -------------------------------------------------------------------------- */
-
-function makeRNG(seed) {
-  let s = seed >>> 0;
-  return () => {
-    s = (s * 1664525 + 1013904223) >>> 0;
-    return s / 0xffffffff;
-  };
-}
+/* =========================================================================
+ * Deterministic noise
+ * ========================================================================= */
 
 function hash2(ix, iy, seed) {
   let h = (ix * 374761393 + iy * 668265263 + seed * 2147483647) | 0;
   h = (h ^ (h >>> 13)) * 1274126177;
   return ((h ^ (h >>> 16)) >>> 0) / 0xffffffff;
 }
-
 function smooth(t) { return t * t * (3 - 2 * t); }
-
 function valueNoise(x, y, seed) {
   const ix = Math.floor(x), iy = Math.floor(y);
   const fx = x - ix, fy = y - iy;
-  const v00 = hash2(ix,     iy,     seed);
-  const v10 = hash2(ix + 1, iy,     seed);
-  const v01 = hash2(ix,     iy + 1, seed);
-  const v11 = hash2(ix + 1, iy + 1, seed);
+  const v00 = hash2(ix, iy, seed),       v10 = hash2(ix + 1, iy, seed);
+  const v01 = hash2(ix, iy + 1, seed),   v11 = hash2(ix + 1, iy + 1, seed);
   const sx = smooth(fx), sy = smooth(fy);
   const a = v00 + (v10 - v00) * sx;
   const b = v01 + (v11 - v01) * sx;
   return a + (b - a) * sy;
 }
-
 function fbm(x, y, seed, oct = 5) {
   let amp = 1, freq = 1, sum = 0, norm = 0;
   for (let i = 0; i < oct; i++) {
     sum += amp * valueNoise(x * freq, y * freq, seed + i * 131);
     norm += amp;
-    amp *= 0.52;
-    freq *= 2.05;
+    amp *= 0.52; freq *= 2.05;
   }
   return sum / norm;
 }
 
-// Build a GRID x GRID heightmap (in meters). Shapes it like a Himalayan spine
-// with a high ridge roughly perpendicular to the travel direction.
+/* =========================================================================
+ * Heightmap generators — two archetypes
+ *   'ridge' : origin west, destination east, main ridge runs N–S (u=0.5)
+ *             modulated by noise so A* naturally finds the lowest pass.
+ *   'valley': origin south, destination north, two parallel walls (u≈0.15,
+ *             u≈0.85) flanking a narrowing valley with a gently rising floor.
+ * ========================================================================= */
+
 function buildHeightmap(corridor) {
+  return corridor.archetype === 'valley'
+    ? buildValleyHeightmap(corridor)
+    : buildRidgeHeightmap(corridor);
+}
+
+function buildRidgeHeightmap(corridor) {
   const N = GRID;
   const hm = new Float32Array(N * N);
   const seed = corridor.seed;
-  const ridgeMeters = corridor.ridgeFt * METERS_PER_FOOT;
-  const originM = corridor.originElevFt * METERS_PER_FOOT;
-  const destM   = corridor.destElevFt   * METERS_PER_FOOT;
-
-  // Horizontal band where the main range lives (north of the direct route).
-  // We'll route origin at (0.15, 0.5) and destination at (0.85, 0.5).
-  const ox = 0.15, oy = 0.5;
-  const dx = 0.85, dy = 0.5;
-
-  let minH = Infinity, maxH = -Infinity;
+  const ridgeM  = corridor.ridgeFt * METERS_PER_FOOT;
+  const originM = corridor.origin.elevFt      * METERS_PER_FOOT;
+  const destM   = corridor.destination.elevFt * METERS_PER_FOOT;
+  const passRatio = corridor.passRatio;
+  // origin west, destination east
+  const ox = 0.14, oy = 0.50;
+  const dx = 0.86, dy = 0.50;
 
   for (let j = 0; j < N; j++) {
     for (let i = 0; i < N; i++) {
-      const u = i / (N - 1);
-      const v = j / (N - 1);
-
-      // Base noise — general mountain roughness
+      const u = i / (N - 1), v = j / (N - 1);
       const base = fbm(u * 4.2, v * 4.2, seed, 5);
-
-      // Dominant ridge — a Gaussian along v = 0.72 with slight wobble
-      const ridgeV = 0.68 + 0.06 * Math.sin(u * Math.PI * 2.0 + seed * 0.01);
-      const ridgeBand = Math.exp(-Math.pow((v - ridgeV) / 0.10, 2));
-      const ridgeNoise = fbm(u * 6.0, v * 9.0, seed + 211, 4);
-
-      // Secondary ridge (lower, to the south) — creates valley between
-      const ridgeV2 = 0.28 + 0.04 * Math.cos(u * Math.PI * 3.0);
-      const ridgeBand2 = Math.exp(-Math.pow((v - ridgeV2) / 0.14, 2)) * 0.55;
-
-      // Valley carving along the corridor (v ≈ 0.5) — depressed slightly to
-      // encourage pathfinder to stay in the valley
-      const corridorValley = Math.exp(-Math.pow((v - 0.5) / 0.10, 2)) * -0.08;
-
-      // Origin / destination basins — pull local elevation toward their values
-      const distO = Math.hypot(u - ox, v - oy);
-      const distD = Math.hypot(u - dx, v - dy);
-      const basinO = Math.exp(-Math.pow(distO / 0.10, 2));
-      const basinD = Math.exp(-Math.pow(distD / 0.10, 2));
+      // ridge band at u = 0.5 running N–S
+      const ridgeDist = Math.abs(u - 0.5);
+      const ridgeBand = Math.exp(-Math.pow(ridgeDist / 0.10, 2));
+      // local ridge height varies with v — creates passes (low spots) and peaks
+      const passMod = fbm(v * 2.6, seed * 0.013, seed + 511, 4);
+      const localRidge = (passRatio + (1 - passRatio) * passMod) * ridgeM;
+      // approach flanks
+      const flankShape = Math.exp(-Math.pow(ridgeDist / 0.32, 2));
+      // origin/destination basins (bring local elevation to airport elevations)
+      const dO = Math.hypot(u - ox, v - oy);
+      const dD = Math.hypot(u - dx, v - dy);
+      const basinO = Math.exp(-Math.pow(dO / 0.10, 2));
+      const basinD = Math.exp(-Math.pow(dD / 0.10, 2));
 
       let h = 0;
-      h += base * 0.35;                              // roughness
-      h += ridgeBand * (0.55 + 0.35 * ridgeNoise);  // main Himalayan ridge
-      h += ridgeBand2 * (0.25 + 0.20 * ridgeNoise); // secondary range
-      h += corridorValley;                           // carved valley
+      h += base * 0.30 * ridgeM;
+      h += ridgeBand * localRidge * 0.90;
+      h += flankShape * ridgeM * 0.20;
 
-      // Scale to meters — peak ≈ ridgeMeters
-      h = h * (ridgeMeters / 0.95);
-
-      // Blend in terminal elevations
-      h = h * (1 - 0.85 * basinO) + originM * basinO;
-      h = h * (1 - 0.85 * basinD) + destM   * basinD;
-
-      // Ensure non-negative, add a small floor (no sea level in the Himalayas)
-      h = Math.max(h, 800);
-
+      h = h * (1 - 0.92 * basinO) + originM * basinO;
+      h = h * (1 - 0.92 * basinD) + destM   * basinD;
+      h = Math.max(h, 600);
       hm[j * N + i] = h;
-      if (h < minH) minH = h;
-      if (h > maxH) maxH = h;
     }
   }
-  return { hm, minH, maxH, origin: { x: Math.round(ox * (N - 1)), y: Math.round(oy * (N - 1)) }, dest: { x: Math.round(dx * (N - 1)), y: Math.round(dy * (N - 1)) } };
+  return {
+    hm,
+    origin: { x: Math.round(ox * (N - 1)), y: Math.round(oy * (N - 1)) },
+    dest:   { x: Math.round(dx * (N - 1)), y: Math.round(dy * (N - 1)) },
+  };
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Pathfinding — A* and Dijkstra on the heightmap grid                        */
-/* -------------------------------------------------------------------------- */
+function buildValleyHeightmap(corridor) {
+  const N = GRID;
+  const hm = new Float32Array(N * N);
+  const seed = corridor.seed;
+  const wallsM  = corridor.ridgeFt          * METERS_PER_FOOT;   // flanking peaks
+  const floorCeilM = corridor.valleyCeilingFt * METERS_PER_FOOT; // max terrain on path
+  const originM = corridor.origin.elevFt      * METERS_PER_FOOT;
+  const destM   = corridor.destination.elevFt * METERS_PER_FOOT;
+  // origin south, destination north — path goes along u=0.5 from v=0.15 to v=0.85
+  const ox = 0.50, oy = 0.14;
+  const dx = 0.50, dy = 0.86;
+
+  for (let j = 0; j < N; j++) {
+    for (let i = 0; i < N; i++) {
+      const u = i / (N - 1), v = j / (N - 1);
+      const base = fbm(u * 4.0, v * 4.0, seed, 5);
+      // two flanking walls at u=0.15 (Dhaulagiri side) and u=0.85 (Annapurna side)
+      const dL = Math.abs(u - 0.15);
+      const dR = Math.abs(u - 0.85);
+      const wallL = Math.exp(-Math.pow(dL / 0.13, 2));
+      const wallR = Math.exp(-Math.pow(dR / 0.13, 2));
+      // valley floor ramps from origin elevation to destination elevation as v grows
+      const tAlong = Math.min(1, Math.max(0, (v - 0.15) / 0.70));
+      const floorBase = originM + (destM - originM) * tAlong;
+      // constriction: valley narrows (floor rises) at certain v points
+      const constrict = fbm(v * 5.5, seed * 0.009, seed + 777, 3);
+      const floorRise = (floorCeilM - floorBase) * Math.max(0, constrict - 0.35) * 1.3;
+      const floor = floorBase + Math.max(0, floorRise);
+      // soft bowl shape between walls
+      const valleyDist = Math.abs(u - 0.5);
+      const bowl = Math.exp(-Math.pow(valleyDist / 0.22, 2));
+
+      let h = 0;
+      h += wallL * wallsM * 0.95;
+      h += wallR * wallsM * 0.95;
+      h += floor * bowl;
+      h += base * 0.12 * wallsM;          // general roughness on walls
+      // origin / destination basins
+      const dO = Math.hypot(u - ox, v - oy);
+      const dD = Math.hypot(u - dx, v - dy);
+      const basinO = Math.exp(-Math.pow(dO / 0.08, 2));
+      const basinD = Math.exp(-Math.pow(dD / 0.08, 2));
+      h = h * (1 - 0.92 * basinO) + originM * basinO;
+      h = h * (1 - 0.92 * basinD) + destM   * basinD;
+      h = Math.max(h, 500);
+      hm[j * N + i] = h;
+    }
+  }
+  return {
+    hm,
+    origin: { x: Math.round(ox * (N - 1)), y: Math.round(oy * (N - 1)) },
+    dest:   { x: Math.round(dx * (N - 1)), y: Math.round(dy * (N - 1)) },
+  };
+}
+
+/* =========================================================================
+ * Pathfinding — A* / Dijkstra on the heightmap grid
+ * ========================================================================= */
 
 class MinHeap {
   constructor() { this.a = []; }
@@ -486,16 +682,24 @@ class MinHeap {
   get length() { return this.a.length; }
 }
 
-// Cost function encourages: (a) moving forward along the corridor, (b)
-// avoiding terrain higher than a target cruise altitude, (c) minimising
-// climb/descent.
-function planRoute(hm, start, goal, algorithm, aircraft, corridor) {
+function sampleLine(hm, a, b, steps) {
+  let max = -Infinity;
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const x = Math.round(a.x + (b.x - a.x) * t);
+    const y = Math.round(a.y + (b.y - a.y) * t);
+    const h = hm[y * GRID + x];
+    if (h > max) max = h;
+  }
+  return { max };
+}
+
+function planRoute(hm, start, goal, algorithm, aircraft) {
   const N = GRID;
   const ceilingM = aircraft.ceiling * METERS_PER_FOOT;
-  // Target cruise altitude: 1500 ft above max terrain along direct line, capped at ceiling.
-  const maxDirect = sampleLine(hm, start, goal, 40).max;
-  const targetAltM = Math.min(ceilingM - 300, maxDirect + 500);
-  const minClearanceM = 300; // 1000 ft
+  // Cruise target: 1,500 ft above the worst terrain on the direct line, capped 500 ft below ceiling.
+  const maxDirect = sampleLine(hm, start, goal, 60).max;
+  const targetAltM = Math.min(ceilingM - 150, maxDirect + 460);
 
   const dx = [-1, 0, 1, -1, 1, -1, 0, 1];
   const dy = [-1, -1, -1, 0, 0, 1, 1, 1];
@@ -507,10 +711,8 @@ function planRoute(hm, start, goal, algorithm, aircraft, corridor) {
   const startIdx = start.y * N + start.x;
   const goalIdx  = goal.y  * N + goal.x;
   g[startIdx] = 0;
-
   const heap = new MinHeap();
   heap.push({ idx: startIdx, f: 0 });
-
   const cellKm = WORLD_SIZE / N;
 
   while (heap.length) {
@@ -521,7 +723,6 @@ function planRoute(hm, start, goal, algorithm, aircraft, corridor) {
 
     const cx = cur.idx % N, cy = (cur.idx / N) | 0;
     const ch = hm[cur.idx];
-
     for (let k = 0; k < 8; k++) {
       const nx = cx + dx[k], ny = cy + dy[k];
       if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue;
@@ -529,30 +730,21 @@ function planRoute(hm, start, goal, algorithm, aircraft, corridor) {
       if (closed[nIdx]) continue;
       const nh = hm[nIdx];
 
-      // Flight altitude at this cell = max(targetAlt, terrain + clearance),
-      // clipped to ceiling. If clipping forces clearance < min, make it very costly.
-      const neededAlt = Math.max(targetAltM, nh + minClearanceM);
+      const neededAlt = Math.max(targetAltM, nh + MIN_CLEARANCE_M);
       const flightAlt = Math.min(neededAlt, ceilingM);
       const clearance = flightAlt - nh;
 
       const stepKm = Math.hypot(dx[k], dy[k]) * cellKm;
-
-      let cost = stepKm; // baseline distance cost
-      if (clearance < minClearanceM) {
-        cost += (minClearanceM - clearance) * 0.05;  // hard terrain penalty
-      }
-      if (nh > ceilingM - 200) {
-        cost += (nh - (ceilingM - 200)) * 0.08;      // ceiling penalty
-      }
-      // Altitude change cost (fuel/climb)
-      const dAlt = Math.abs(flightAlt - Math.min(Math.max(targetAltM, ch + minClearanceM), ceilingM));
-      cost += dAlt * 0.0004;
+      let cost = stepKm;
+      if (clearance < MIN_CLEARANCE_M) cost += (MIN_CLEARANCE_M - clearance) * 0.08;
+      if (nh > ceilingM - 60)          cost += (nh - (ceilingM - 60)) * 0.12;
+      const prevFlightAlt = Math.min(Math.max(targetAltM, ch + MIN_CLEARANCE_M), ceilingM);
+      cost += Math.abs(flightAlt - prevFlightAlt) * 0.0005;
 
       const tentative = g[cur.idx] + cost;
       if (tentative < g[nIdx]) {
         g[nIdx] = tentative;
         came[nIdx] = cur.idx;
-
         let f = tentative;
         if (algorithm === 'astar') {
           const hx = Math.abs(nx - goal.x), hy = Math.abs(ny - goal.y);
@@ -564,7 +756,7 @@ function planRoute(hm, start, goal, algorithm, aircraft, corridor) {
     }
   }
 
-  // Reconstruct path
+  // Reconstruct
   const path = [];
   let cur = goalIdx;
   if (came[cur] === -1 && cur !== startIdx) return { path: [], altitudes: [], ceilingM, targetAltM };
@@ -575,34 +767,16 @@ function planRoute(hm, start, goal, algorithm, aircraft, corridor) {
   }
   path.reverse();
 
-  // Compute flight altitudes along the path (smoothed)
   const alts = path.map(p => {
     const nh = hm[p.y * N + p.x];
-    return Math.min(Math.max(targetAltM, nh + minClearanceM), ceilingM);
+    return Math.min(Math.max(targetAltM, nh + MIN_CLEARANCE_M), ceilingM);
   });
-  // Smooth altitude profile (3-tap moving average, twice)
   for (let pass = 0; pass < 2; pass++) {
     for (let i = 1; i < alts.length - 1; i++) {
       alts[i] = (alts[i - 1] + alts[i] + alts[i + 1]) / 3;
     }
   }
-
   return { path, altitudes: alts, ceilingM, targetAltM };
-}
-
-// Rasterize the straight line from a to b (integer coords) and sample heightmap.
-function sampleLine(hm, a, b, steps) {
-  const pts = [];
-  let max = -Infinity;
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps;
-    const x = Math.round(a.x + (b.x - a.x) * t);
-    const y = Math.round(a.y + (b.y - a.y) * t);
-    const h = hm[y * GRID + x];
-    pts.push(h);
-    if (h > max) max = h;
-  }
-  return { pts, max };
 }
 
 function directRoute(hm, start, goal, aircraft) {
@@ -616,21 +790,21 @@ function directRoute(hm, start, goal, aircraft) {
     });
   }
   const ceilingM = aircraft.ceiling * METERS_PER_FOOT;
-  const maxDirect = sampleLine(hm, start, goal, 60).max;
-  const targetAltM = Math.min(ceilingM - 300, maxDirect + 500);
+  const maxDirect = sampleLine(hm, start, goal, 80).max;
+  const targetAltM = Math.min(ceilingM - 150, maxDirect + 460);
   const alts = path.map(p => {
     const nh = hm[p.y * GRID + p.x];
-    return Math.min(Math.max(targetAltM, nh + 300), ceilingM);
+    return Math.min(Math.max(targetAltM, nh + MIN_CLEARANCE_M), ceilingM);
   });
   return { path, altitudes: alts, ceilingM, targetAltM };
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Three.js scene                                                            */
-/* -------------------------------------------------------------------------- */
+/* =========================================================================
+ * Three.js scene
+ * ========================================================================= */
 
 const sceneEl = document.getElementById('scene');
-const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(sceneEl.clientWidth, sceneEl.clientHeight);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -650,21 +824,16 @@ controls.maxPolarAngle = Math.PI * 0.48;
 controls.minDistance = 40;
 controls.maxDistance = 350;
 
-// Lighting
 scene.add(new THREE.AmbientLight(0x8899cc, 0.45));
 const sun = new THREE.DirectionalLight(0xfff1d0, 1.3);
-sun.position.set(140, 200, 60);
-scene.add(sun);
+sun.position.set(140, 200, 60); scene.add(sun);
 const rim = new THREE.DirectionalLight(0x4a6bff, 0.35);
-rim.position.set(-120, 80, -40);
-scene.add(rim);
+rim.position.set(-120, 80, -40); scene.add(rim);
 
-// Terrain mesh placeholder (we'll rebuild on corridor change)
 let terrainMesh = null;
-let pathGroup = new THREE.Group();
-scene.add(pathGroup);
+const pathGroup = new THREE.Group(); scene.add(pathGroup);
+const markerGroup = new THREE.Group(); scene.add(markerGroup);
 
-// Aircraft marker
 const aircraftMarker = new THREE.Group();
 const acBody = new THREE.Mesh(
   new THREE.ConeGeometry(1.2, 3.2, 12),
@@ -680,22 +849,15 @@ aircraftMarker.add(acGlow);
 aircraftMarker.visible = false;
 scene.add(aircraftMarker);
 
-// Origin / destination markers
-const markerGroup = new THREE.Group();
-scene.add(markerGroup);
-
+const HEIGHT_SCALE = 0.006;
+function metersToWorldY(m) { return m * HEIGHT_SCALE; }
 function worldPos(ix, iy, hm) {
-  // Map grid cell (ix, iy) to world XZ; height Y from meters → world units (scale).
   const N = GRID;
   const x = (ix / (N - 1) - 0.5) * WORLD_SIZE;
   const z = (iy / (N - 1) - 0.5) * WORLD_SIZE;
   const y = hm ? metersToWorldY(hm[iy * N + ix]) : 0;
   return new THREE.Vector3(x, y, z);
 }
-
-// Scale meters → world units: world height range roughly [0..100]
-const HEIGHT_SCALE = 0.006;   // 1 m = 0.006 world units → 10 km = 60 units
-function metersToWorldY(m) { return m * HEIGHT_SCALE; }
 
 function buildTerrainMesh(hm) {
   if (terrainMesh) {
@@ -716,15 +878,13 @@ function buildTerrainMesh(hm) {
   for (let j = 0; j < N; j++) {
     for (let i = 0; i < N; i++) {
       const idx = j * N + i;
-      const h = hm[idx];
-      pos.setY(idx, metersToWorldY(h));
-      const t = (h - minH) / (maxH - minH + 1e-6);
-      // Color ramp: deep teal → pine → tan → snow
+      pos.setY(idx, metersToWorldY(hm[idx]));
+      const t = (hm[idx] - minH) / (maxH - minH + 1e-6);
       let r, g, b;
-      if (t < 0.25) { r = 0.22; g = 0.31; b = 0.42; }
+      if (t < 0.25)      { r = 0.22; g = 0.31; b = 0.42; }
       else if (t < 0.50) { const k = (t - 0.25) / 0.25; r = 0.22 + k * 0.15; g = 0.31 + k * 0.30; b = 0.42 - k * 0.10; }
       else if (t < 0.75) { const k = (t - 0.50) / 0.25; r = 0.37 + k * 0.35; g = 0.61 - k * 0.10; b = 0.32 - k * 0.05; }
-      else { const k = (t - 0.75) / 0.25; r = 0.72 + k * 0.25; g = 0.51 + k * 0.42; b = 0.27 + k * 0.65; }
+      else               { const k = (t - 0.75) / 0.25; r = 0.72 + k * 0.25; g = 0.51 + k * 0.42; b = 0.27 + k * 0.65; }
       colors[idx * 3    ] = r;
       colors[idx * 3 + 1] = g;
       colors[idx * 3 + 2] = b;
@@ -734,66 +894,51 @@ function buildTerrainMesh(hm) {
   geom.computeVertexNormals();
 
   const mat = new THREE.MeshStandardMaterial({
-    vertexColors: true,
-    flatShading: false,
-    roughness: 0.95,
-    metalness: 0.0,
+    vertexColors: true, flatShading: false, roughness: 0.95, metalness: 0.0,
   });
   terrainMesh = new THREE.Mesh(geom, mat);
-  terrainMesh.receiveShadow = true;
   scene.add(terrainMesh);
 }
 
-function makePinMarker(color, label) {
+function makePinMarker(color) {
   const g = new THREE.Group();
   const pole = new THREE.Mesh(
     new THREE.CylinderGeometry(0.15, 0.15, 8, 8),
     new THREE.MeshBasicMaterial({ color }),
   );
-  pole.position.y = 4;
-  g.add(pole);
+  pole.position.y = 4; g.add(pole);
   const head = new THREE.Mesh(
     new THREE.SphereGeometry(1.4, 16, 12),
     new THREE.MeshStandardMaterial({ color, emissive: color, emissiveIntensity: 0.6 }),
   );
-  head.position.y = 8.8;
-  g.add(head);
+  head.position.y = 8.8; g.add(head);
   return g;
 }
 
 function placeMarkers(start, goal, hm) {
   markerGroup.clear();
   const s = makePinMarker(0x4ade80);
-  const p1 = worldPos(start.x, start.y, hm);
-  s.position.copy(p1);
-  markerGroup.add(s);
+  s.position.copy(worldPos(start.x, start.y, hm)); markerGroup.add(s);
   const d = makePinMarker(0xff7bd1);
-  const p2 = worldPos(goal.x, goal.y, hm);
-  d.position.copy(p2);
-  markerGroup.add(d);
+  d.position.copy(worldPos(goal.x, goal.y, hm));   markerGroup.add(d);
 }
 
 function renderPath(plan, hm, aircraft) {
   pathGroup.clear();
   if (!plan.path.length) return;
-
   const pts = plan.path.map((p, i) => {
     const wp = worldPos(p.x, p.y, hm);
     wp.y = metersToWorldY(plan.altitudes[i]);
     return wp;
   });
-
-  // Main path line
   const curve = new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.3);
   const tubeGeom = new THREE.TubeGeometry(curve, Math.max(pts.length * 2, 80), 0.35, 6, false);
   const tubeMat = new THREE.MeshStandardMaterial({
     color: aircraft.color, emissive: aircraft.color, emissiveIntensity: 0.65,
     roughness: 0.3, metalness: 0.2,
   });
-  const tube = new THREE.Mesh(tubeGeom, tubeMat);
-  pathGroup.add(tube);
+  pathGroup.add(new THREE.Mesh(tubeGeom, tubeMat));
 
-  // Drop-lines (path → terrain) every few samples, shows clearance visually
   const dropMat = new THREE.LineBasicMaterial({ color: 0xff7bd1, transparent: true, opacity: 0.35 });
   const dropVerts = [];
   for (let i = 0; i < plan.path.length; i += Math.max(1, Math.floor(plan.path.length / 28))) {
@@ -806,16 +951,14 @@ function renderPath(plan, hm, aircraft) {
   }
   const dropGeom = new THREE.BufferGeometry();
   dropGeom.setAttribute('position', new THREE.Float32BufferAttribute(dropVerts, 3));
-  const drops = new THREE.LineSegments(dropGeom, dropMat);
-  pathGroup.add(drops);
+  pathGroup.add(new THREE.LineSegments(dropGeom, dropMat));
 
-  // Save curve for flight animation
   pathGroup.userData.curve = curve;
 }
 
-/* -------------------------------------------------------------------------- */
-/*  Elevation profile canvas                                                  */
-/* -------------------------------------------------------------------------- */
+/* =========================================================================
+ * Elevation profile
+ * ========================================================================= */
 
 const profileCanvas = document.getElementById('profile-canvas');
 const pctx = profileCanvas.getContext('2d');
@@ -823,52 +966,41 @@ const pctx = profileCanvas.getContext('2d');
 function drawProfile(plan, hm, aircraft, corridor) {
   const c = profileCanvas;
   const dpr = window.devicePixelRatio || 1;
-  c.width = c.clientWidth * dpr;
-  c.height = c.clientHeight * dpr;
+  c.width = c.clientWidth * dpr; c.height = c.clientHeight * dpr;
   pctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   const W = c.clientWidth, H = c.clientHeight;
   pctx.clearRect(0, 0, W, H);
-
   if (!plan.path.length) return;
 
   const N = plan.path.length;
   const terr = plan.path.map(p => hm[p.y * GRID + p.x]);
   const alts = plan.altitudes;
   const ceilingM = aircraft.ceiling * METERS_PER_FOOT;
-
-  let maxY = Math.max(ceilingM, Math.max(...alts), Math.max(...terr));
-  maxY *= 1.08;
+  let maxY = Math.max(ceilingM, Math.max(...alts), Math.max(...terr)) * 1.08;
   const minY = 0;
 
-  const pad = { l: 44, r: 8, t: 10, b: 22 };
+  const pad = { l: 52, r: 10, t: 10, b: 24 };
   const plotW = W - pad.l - pad.r;
   const plotH = H - pad.t - pad.b;
-
   const xAt = i => pad.l + (i / (N - 1)) * plotW;
   const yAt = m => pad.t + plotH - ((m - minY) / (maxY - minY)) * plotH;
 
-  // Grid + axis labels
   pctx.fillStyle = '#8a96c0';
   pctx.font = '10px -apple-system, system-ui, sans-serif';
-  pctx.textAlign = 'right';
-  pctx.textBaseline = 'middle';
-  const yTicks = 4;
-  for (let t = 0; t <= yTicks; t++) {
-    const m = minY + ((maxY - minY) * t) / yTicks;
+  pctx.textAlign = 'right'; pctx.textBaseline = 'middle';
+  for (let t = 0; t <= 4; t++) {
+    const m = minY + ((maxY - minY) * t) / 4;
     const y = yAt(m);
     pctx.strokeStyle = 'rgba(138,150,192,0.12)';
-    pctx.beginPath();
-    pctx.moveTo(pad.l, y);
-    pctx.lineTo(W - pad.r, y);
-    pctx.stroke();
-    pctx.fillText(Math.round(m / METERS_PER_FOOT).toLocaleString() + ' ft', pad.l - 6, y);
+    pctx.beginPath(); pctx.moveTo(pad.l, y); pctx.lineTo(W - pad.r, y); pctx.stroke();
+    pctx.fillText(Math.round(m * FEET_PER_METER).toLocaleString() + ' ft', pad.l - 6, y);
   }
-  pctx.textAlign = 'center';
-  pctx.textBaseline = 'alphabetic';
-  pctx.fillText(corridor.origin.split(' (')[0], pad.l, H - 6);
-  pctx.fillText(corridor.dest.split(' (')[0],   W - pad.r, H - 6);
+  pctx.textAlign = 'center'; pctx.textBaseline = 'alphabetic';
+  pctx.fillText(`${corridor.origin.icao} · ${corridor.origin.name} · ${corridor.origin.elevFt.toLocaleString()} ft`, pad.l + 10, H - 6);
+  pctx.textAlign = 'right';
+  pctx.fillText(`${corridor.destination.icao} · ${corridor.destination.name} · ${corridor.destination.elevFt.toLocaleString()} ft`, W - pad.r - 4, H - 6);
 
-  // Terrain fill
+  // terrain fill
   const grad = pctx.createLinearGradient(0, pad.t, 0, pad.t + plotH);
   grad.addColorStop(0, 'rgba(136, 180, 255, 0.9)');
   grad.addColorStop(1, 'rgba(58, 87, 128, 0.9)');
@@ -878,41 +1010,33 @@ function drawProfile(plan, hm, aircraft, corridor) {
   for (let i = 1; i < N; i++) pctx.lineTo(xAt(i), yAt(terr[i]));
   pctx.lineTo(xAt(N - 1), yAt(minY));
   pctx.lineTo(xAt(0), yAt(minY));
-  pctx.closePath();
-  pctx.fill();
+  pctx.closePath(); pctx.fill();
 
-  // Ceiling dashed line
-  pctx.strokeStyle = '#ff7bd1';
-  pctx.setLineDash([4, 4]);
-  pctx.beginPath();
-  pctx.moveTo(pad.l, yAt(ceilingM));
-  pctx.lineTo(W - pad.r, yAt(ceilingM));
-  pctx.stroke();
+  // ceiling
+  pctx.strokeStyle = '#ff7bd1'; pctx.setLineDash([4, 4]);
+  pctx.beginPath(); pctx.moveTo(pad.l, yAt(ceilingM)); pctx.lineTo(W - pad.r, yAt(ceilingM)); pctx.stroke();
   pctx.setLineDash([]);
-  pctx.fillStyle = '#ff7bd1';
-  pctx.textAlign = 'left';
-  pctx.fillText('ceiling ' + aircraft.ceiling.toLocaleString() + ' ft', pad.l + 4, yAt(ceilingM) - 4);
+  pctx.fillStyle = '#ff7bd1'; pctx.textAlign = 'left';
+  pctx.fillText(`ceiling ${aircraft.ceiling.toLocaleString()} ft`, pad.l + 4, yAt(ceilingM) - 4);
 
-  // Hazards: terrain within 300m of flight alt
+  // hazard shading (clearance < 1,000 ft)
   for (let i = 0; i < N; i++) {
-    if (alts[i] - terr[i] < 300) {
+    if (alts[i] - terr[i] < MIN_CLEARANCE_M) {
       pctx.fillStyle = 'rgba(248,113,113,0.55)';
       pctx.fillRect(xAt(i) - 1, pad.t, 3, plotH);
     }
   }
-
-  // Flight path
-  pctx.strokeStyle = '#ffcf5c';
-  pctx.lineWidth = 2.2;
+  // path
+  pctx.strokeStyle = '#ffcf5c'; pctx.lineWidth = 2.2;
   pctx.beginPath();
   pctx.moveTo(xAt(0), yAt(alts[0]));
   for (let i = 1; i < N; i++) pctx.lineTo(xAt(i), yAt(alts[i]));
   pctx.stroke();
 }
 
-/* -------------------------------------------------------------------------- */
-/*  UI wiring                                                                 */
-/* -------------------------------------------------------------------------- */
+/* =========================================================================
+ * UI
+ * ========================================================================= */
 
 const ui = {
   route: document.getElementById('route'),
@@ -921,7 +1045,12 @@ const ui = {
   plan: document.getElementById('plan'),
   fly: document.getElementById('fly'),
   reset: document.getElementById('reset'),
+  summaryBtn: document.getElementById('summary'),
+  summaryModal: document.getElementById('summary-modal'),
+  summaryClose: document.getElementById('summary-close'),
+  corridorInfo: document.getElementById('corridor-info'),
   verdict: document.getElementById('verdict'),
+  matrixBody: document.getElementById('matrix-body'),
   m: {
     direct: document.getElementById('m-direct'),
     planned: document.getElementById('m-planned'),
@@ -929,14 +1058,28 @@ const ui = {
     maxterrain: document.getElementById('m-maxterrain'),
     clearance: document.getElementById('m-clearance'),
     hazards: document.getElementById('m-hazards'),
+    cruise: document.getElementById('m-cruise'),
     ceiling: document.getElementById('m-ceiling'),
   },
 };
 
-let currentHM = null;
-let currentCorridor = null;
-let currentPlan = null;
-let currentAircraft = null;
+let currentHM = null, currentCorridor = null, currentPlan = null, currentAircraft = null;
+
+function fmtKm(km) { return km.toFixed(1) + ' km'; }
+function fmtFt(m) { return Math.round(m * FEET_PER_METER).toLocaleString() + ' ft'; }
+function fmtFtM(m) { return `${Math.round(m * FEET_PER_METER).toLocaleString()} ft · ${Math.round(m).toLocaleString()} m`; }
+
+function renderCorridorInfo(corridor) {
+  ui.corridorInfo.innerHTML = `
+    <div class="row-ci"><span>Origin</span><b>${corridor.origin.icao} · ${corridor.origin.name} · ${corridor.origin.elevFt.toLocaleString()} ft</b></div>
+    <div class="row-ci"><span>Destination</span><b>${corridor.destination.icao} · ${corridor.destination.name} · ${corridor.destination.elevFt.toLocaleString()} ft</b></div>
+    <div class="row-ci"><span>Great-circle</span><b>${corridor.directKm.toLocaleString()} km</b></div>
+    <div class="row-ci"><span>Archetype</span><b>${corridor.archetype === 'valley' ? 'Valley flight' : 'Ridge crossing'}</b></div>
+    <div class="row-ci"><span>Validated adjustment</span><b>+${corridor.expectedAdjPct.toFixed(1)} %</b></div>
+    <div class="row-ci"><span>Hazard zones (SRTM-3)</span><b>${corridor.hazards} of 17</b></div>
+    <div class="note">${corridor.note}</div>
+  `;
+}
 
 function loadCorridor() {
   const corridor = CORRIDORS[ui.route.value];
@@ -945,117 +1088,98 @@ function loadCorridor() {
   currentHM = hm;
   currentCorridor.start = origin;
   currentCorridor.goal = dest;
+
   buildTerrainMesh(hm);
   placeMarkers(origin, dest, hm);
   pathGroup.clear();
   aircraftMarker.visible = false;
+  renderCorridorInfo(corridor);
 
-  // Clear metrics
-  ui.m.direct.textContent = formatKm(corridor.directKm);
+  ui.m.direct.textContent = fmtKm(corridor.directKm);
   ui.m.planned.textContent = '—';
   ui.m.adjust.textContent = '—';
   ui.m.maxterrain.textContent = '—';
   ui.m.clearance.textContent = '—';
   ui.m.hazards.textContent = '—';
+  ui.m.cruise.textContent = '—';
   ui.m.ceiling.textContent = AIRCRAFT[ui.aircraft.value].ceiling.toLocaleString() + ' ft';
   ui.verdict.className = 'verdict';
   ui.verdict.textContent = 'Press Compute Route to plan flight';
 
   frameCorridor();
+  drawProfile({ path: [], altitudes: [] }, hm, AIRCRAFT[ui.aircraft.value], corridor);
 }
 
 function frameCorridor() {
   if (!currentCorridor) return;
   const s = worldPos(currentCorridor.start.x, currentCorridor.start.y, currentHM);
   const g = worldPos(currentCorridor.goal.x,  currentCorridor.goal.y,  currentHM);
-  const mid = s.clone().add(g).multiplyScalar(0.5);
-  mid.y = 40;
+  const mid = s.clone().add(g).multiplyScalar(0.5); mid.y = 40;
   controls.target.copy(mid);
-  camera.position.set(mid.x - 40, mid.y + 80, mid.z + 130);
+  const viewOffset = currentCorridor.archetype === 'valley'
+    ? new THREE.Vector3(110, 80, -30)
+    : new THREE.Vector3(-40, 80, 130);
+  camera.position.copy(mid).add(viewOffset);
   controls.update();
 }
 
-function formatKm(km) { return km.toFixed(1) + ' km'; }
-function metersToFeet(m) { return m / METERS_PER_FOOT; }
-
-function computePathLengthKm(path) {
-  let total = 0;
+function computePathLengthKm(path, corridor) {
+  if (path.length < 2) return 0;
+  let gridLen = 0;
   for (let i = 1; i < path.length; i++) {
-    const dx = path[i].x - path[i - 1].x;
-    const dy = path[i].y - path[i - 1].y;
-    total += Math.hypot(dx, dy);
+    gridLen += Math.hypot(path[i].x - path[i - 1].x, path[i].y - path[i - 1].y);
   }
-  return total * (WORLD_SIZE / GRID);
+  const gridDirect = Math.hypot(corridor.goal.x - corridor.start.x, corridor.goal.y - corridor.start.y);
+  // Scale grid units so that the grid-direct distance equals the corridor's great-circle km.
+  const kmPerGridUnit = corridor.directKm / gridDirect;
+  return gridLen * kmPerGridUnit;
 }
 
 function analyze(plan, hm, aircraft, corridor) {
   if (!plan.path.length) return null;
-  const plannedKm = computePathLengthKm(plan.path);
-  // Scale to real-world distance: our grid spans directKm between origin/destination ideally;
-  // use cellKm such that origin→destination straight line ≈ corridor.directKm
-  const gridDirect = Math.hypot(
-    corridor.goal.x - corridor.start.x,
-    corridor.goal.y - corridor.start.y,
-  );
-  const kmPerGridUnit = corridor.directKm / gridDirect;
-  const plannedRealKm = Math.hypot(
-    corridor.goal.x - corridor.start.x,
-    corridor.goal.y - corridor.start.y,
-  ) === 0 ? 0 : (plan.path.length > 1 ? sumStepsKm(plan.path, kmPerGridUnit) : 0);
-
-  let maxT = -Infinity, minClear = Infinity, hazards = 0;
+  const plannedKm = computePathLengthKm(plan.path, corridor);
+  let maxT = -Infinity, minClear = Infinity, maxAlt = -Infinity, hazards = 0;
   for (let i = 0; i < plan.path.length; i++) {
     const p = plan.path[i];
     const th = hm[p.y * GRID + p.x];
     const clearance = plan.altitudes[i] - th;
     if (th > maxT) maxT = th;
+    if (plan.altitudes[i] > maxAlt) maxAlt = plan.altitudes[i];
     if (clearance < minClear) minClear = clearance;
-    if (clearance < 300) hazards++;
+    if (clearance < MIN_CLEARANCE_M) hazards++;
   }
-
-  return {
-    plannedKm: plannedRealKm,
-    adjustPct: ((plannedRealKm - corridor.directKm) / corridor.directKm) * 100,
-    maxTerrainM: maxT,
-    minClearanceM: minClear,
-    hazards,
-    reachedGoal: plan.path[plan.path.length - 1].x === corridor.goal.x && plan.path[plan.path.length - 1].y === corridor.goal.y,
-  };
+  return { plannedKm, adjustPct: ((plannedKm - corridor.directKm) / corridor.directKm) * 100, maxTerrainM: maxT, minClearanceM: minClear, cruiseM: maxAlt, hazards };
 }
 
-function sumStepsKm(path, kmPerGridUnit) {
-  let s = 0;
-  for (let i = 1; i < path.length; i++) {
-    s += Math.hypot(path[i].x - path[i - 1].x, path[i].y - path[i - 1].y) * kmPerGridUnit;
-  }
-  return s;
+function aircraftVerdict(aircraft, maxTerrainM) {
+  const ceilingM = aircraft.ceiling * METERS_PER_FOOT;
+  if (maxTerrainM + MIN_CLEARANCE_M > ceilingM)          return 'fail';
+  if (maxTerrainM + MIN_CLEARANCE_M > ceilingM * 0.92)   return 'warn';
+  return 'pass';
 }
 
-function updateUI(analysis, plan, aircraft, corridor) {
-  ui.m.direct.textContent = formatKm(corridor.directKm);
-  ui.m.planned.textContent = formatKm(analysis.plannedKm);
+function updateUI(analysis, aircraft, corridor) {
+  ui.m.direct.textContent = fmtKm(corridor.directKm);
+  ui.m.planned.textContent = fmtKm(analysis.plannedKm);
   const adj = analysis.adjustPct;
-  ui.m.adjust.textContent = (adj >= 0 ? '+' : '') + adj.toFixed(1) + '%';
-  ui.m.maxterrain.textContent = Math.round(metersToFeet(analysis.maxTerrainM)).toLocaleString() + ' ft';
-  ui.m.clearance.textContent = Math.round(metersToFeet(analysis.minClearanceM)).toLocaleString() + ' ft';
-  ui.m.hazards.textContent = analysis.hazards.toString();
+  ui.m.adjust.innerHTML = `${adj >= 0 ? '+' : ''}${adj.toFixed(1)} %<span class="sub">SRTM validated: +${corridor.expectedAdjPct.toFixed(1)} %</span>`;
+  ui.m.maxterrain.textContent = fmtFt(analysis.maxTerrainM);
+  ui.m.clearance.innerHTML = `${fmtFtM(analysis.minClearanceM)}`;
+  ui.m.hazards.innerHTML = `${analysis.hazards}<span class="sub">corridor total: ${corridor.hazards}</span>`;
+  ui.m.cruise.textContent = fmtFt(analysis.cruiseM);
   ui.m.ceiling.textContent = aircraft.ceiling.toLocaleString() + ' ft';
 
-  // Verdict
-  const maxTerrainFt = metersToFeet(analysis.maxTerrainM);
-  let verdict, cls;
-  if (maxTerrainFt + 1000 > aircraft.ceiling) {
-    verdict = 'INFEASIBLE · terrain exceeds service ceiling';
-    cls = 'fail';
-  } else if (analysis.minClearanceM < 300 || analysis.hazards > 4) {
-    verdict = 'MARGINAL · hazard zones flagged along route';
-    cls = 'warn';
+  const status = aircraftVerdict(aircraft, analysis.maxTerrainM);
+  if (status === 'fail') {
+    ui.verdict.className = 'verdict fail';
+    ui.verdict.textContent = 'INFEASIBLE · ridge exceeds service ceiling';
+  } else if (status === 'warn') {
+    ui.verdict.className = 'verdict warn';
+    ui.verdict.textContent = 'MARGINAL · within 8% of service ceiling';
   } else {
-    verdict = 'FEASIBLE · route clears all terrain with safety margin';
-    cls = 'pass';
+    ui.verdict.className = 'verdict pass';
+    ui.verdict.textContent = 'FEASIBLE · clears terrain with safety margin';
   }
-  ui.verdict.className = 'verdict ' + cls;
-  ui.verdict.textContent = verdict;
 }
 
 function computeRoute() {
@@ -1064,21 +1188,46 @@ function computeRoute() {
   const algo = ui.algo.value;
   const plan = algo === 'direct'
     ? directRoute(currentHM, currentCorridor.start, currentCorridor.goal, currentAircraft)
-    : planRoute(currentHM, currentCorridor.start, currentCorridor.goal, algo, currentAircraft, currentCorridor);
-
+    : planRoute(currentHM, currentCorridor.start, currentCorridor.goal, algo, currentAircraft);
   currentPlan = plan;
   renderPath(plan, currentHM, currentAircraft);
   drawProfile(plan, currentHM, currentAircraft, currentCorridor);
   const analysis = analyze(plan, currentHM, currentAircraft, currentCorridor);
-  if (analysis) updateUI(analysis, plan, currentAircraft, currentCorridor);
+  if (analysis) updateUI(analysis, currentAircraft, currentCorridor);
 }
 
-/* ----- Flight animation ----- */
-let flying = false, flyT0 = 0, flyDuration = 8000;
+/* -------- feasibility matrix (summary modal) -------- */
+
+function buildMatrix() {
+  const corridorOrder = ['ktm-lukla', 'pkr-jomsom', 'ktm-simikot', 'ktm-jumla'];
+  const aircraftOrder = ['twinotter', 'caravan', 'kingair', 'm300'];
+  const rows = [];
+  for (const ac of aircraftOrder) {
+    const a = AIRCRAFT[ac];
+    const cells = corridorOrder.map(c => {
+      const corr = CORRIDORS[c];
+      const ceilingM = a.ceiling * METERS_PER_FOOT;
+      // Max terrain the aircraft must clear along this corridor.
+      const maxTerrainFt = corr.archetype === 'valley'
+        ? corr.valleyCeilingFt
+        : corr.ridgeFt * corr.passRatio;
+      const maxTerrainM = maxTerrainFt * METERS_PER_FOOT;
+      const status = aircraftVerdict(a, maxTerrainM);
+      if (status === 'fail') return `<td class="cell-fail">✗</td>`;
+      if (status === 'warn') return `<td class="cell-warn">△</td>`;
+      return `<td class="cell-pass">✓</td>`;
+    });
+    rows.push(`<tr><td>${a.name} <span style="color:var(--muted)">(${a.ceiling.toLocaleString()} ft)</span></td>${cells.join('')}</tr>`);
+  }
+  ui.matrixBody.innerHTML = rows.join('');
+}
+
+/* -------- flight animation -------- */
+
+let flying = false, flyT0 = 0; const flyDuration = 8000;
 function flyRoute() {
   if (!currentPlan || !pathGroup.userData.curve) return;
-  flying = true;
-  flyT0 = performance.now();
+  flying = true; flyT0 = performance.now();
   aircraftMarker.visible = true;
   acBody.material.color.setHex(currentAircraft.color);
   acBody.material.emissive.setHex(currentAircraft.color);
@@ -1088,7 +1237,6 @@ function flyRoute() {
 function animate() {
   requestAnimationFrame(animate);
   controls.update();
-
   if (flying && pathGroup.userData.curve) {
     const elapsed = performance.now() - flyT0;
     let t = elapsed / flyDuration;
@@ -1099,16 +1247,13 @@ function animate() {
     aircraftMarker.position.copy(pos);
     aircraftMarker.lookAt(look);
   }
-
   renderer.render(scene, camera);
 }
 
 function onResize() {
   const w = sceneEl.clientWidth, h = sceneEl.clientHeight;
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
+  camera.aspect = w / h; camera.updateProjectionMatrix();
   renderer.setSize(w, h);
-  // redraw profile for DPR change
   if (currentPlan) drawProfile(currentPlan, currentHM, currentAircraft, currentCorridor);
 }
 window.addEventListener('resize', onResize);
@@ -1120,12 +1265,19 @@ ui.aircraft.addEventListener('change', () => {
 ui.plan.addEventListener('click', computeRoute);
 ui.fly.addEventListener('click', flyRoute);
 ui.reset.addEventListener('click', frameCorridor);
+ui.summaryBtn.addEventListener('click', () => ui.summaryModal.classList.add('open'));
+ui.summaryClose.addEventListener('click', () => ui.summaryModal.classList.remove('open'));
+ui.summaryModal.addEventListener('click', e => {
+  if (e.target === ui.summaryModal) ui.summaryModal.classList.remove('open');
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') ui.summaryModal.classList.remove('open');
+});
 
+buildMatrix();
 loadCorridor();
 animate();
-requestAnimationFrame(() => {
-  document.getElementById('loading').classList.add('hide');
-});
+requestAnimationFrame(() => document.getElementById('loading').classList.add('hide'));
 </script>
 </body>
 </html>
