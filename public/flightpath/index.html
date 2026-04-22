@@ -621,48 +621,68 @@ function buildValleyHeightmap(corridor) {
   const N = GRID;
   const hm = new Float32Array(N * N);
   const seed = corridor.seed;
-  const wallsM  = corridor.ridgeFt          * METERS_PER_FOOT;   // flanking peaks
-  const floorCeilM = corridor.valleyCeilingFt * METERS_PER_FOOT; // max terrain on path
-  const originM = corridor.origin.elevFt      * METERS_PER_FOOT;
-  const destM   = corridor.destination.elevFt * METERS_PER_FOOT;
-  // origin south, destination north — path goes along u=0.5 from v=0.15 to v=0.85
+  const wallsM     = corridor.ridgeFt          * METERS_PER_FOOT;  // flanking peaks (Annapurna / Dhaulagiri)
+  const floorCeilM = corridor.valleyCeilingFt  * METERS_PER_FOOT;  // max terrain on path
+  const originM    = corridor.origin.elevFt      * METERS_PER_FOOT;
+  const destM      = corridor.destination.elevFt * METERS_PER_FOOT;
+  // path runs south → north along u ≈ 0.5, flanked by two wall chains
   const ox = 0.50, oy = 0.14;
   const dx = 0.50, dy = 0.86;
 
   for (let j = 0; j < N; j++) {
     for (let i = 0; i < N; i++) {
       const u = i / (N - 1), v = j / (N - 1);
-      const base = fbm(u * 4.0, v * 4.0, seed, 5);
-      // two flanking walls at u=0.15 (Dhaulagiri side) and u=0.85 (Annapurna side)
-      const dL = Math.abs(u - 0.15);
-      const dR = Math.abs(u - 0.85);
-      const wallL = Math.exp(-Math.pow(dL / 0.13, 2));
-      const wallR = Math.exp(-Math.pow(dR / 0.13, 2));
-      // valley floor ramps from origin elevation to destination elevation as v grows
-      const tAlong = Math.min(1, Math.max(0, (v - 0.15) / 0.70));
-      const floorBase = originM + (destM - originM) * tAlong;
-      // constriction: valley narrows (floor rises) at certain v points
-      const constrict = fbm(v * 5.5, seed * 0.009, seed + 777, 3);
-      const floorRise = (floorCeilM - floorBase) * Math.max(0, constrict - 0.35) * 1.3;
-      const floor = floorBase + Math.max(0, floorRise);
-      // soft bowl shape between walls
-      const valleyDist = Math.abs(u - 0.5);
-      const bowl = Math.exp(-Math.pow(valleyDist / 0.22, 2));
 
-      let h = 0;
-      h += wallL * wallsM * 0.95;
-      h += wallR * wallsM * 0.95;
-      h += floor * bowl;
-      h += base * 0.12 * wallsM;          // general roughness on walls
-      // origin / destination basins
+      // Multi-octave rolling mountain field — same approach as the ridge archetype.
+      const big   = fbm(u * 2.3,  v * 2.3,  seed,       4);
+      const mid   = fbm(u * 5.2,  v * 5.2,  seed + 313, 4);
+      const fine  = fbm(u * 10.0, v * 10.0, seed + 577, 3);
+      const peaky = fbm(u * 3.4,  v * 3.8,  seed + 881, 3);
+      const baseField = 0.32 + 0.28 * big + 0.16 * mid + 0.10 * fine + 0.12 * peaky;
+
+      // Two wall chains running south-to-north. Each wall's local height
+      // varies with v (some sections are higher than others — summits vs cols).
+      const westU = 0.16 + 0.035 * Math.sin(v * Math.PI * 2.3 + seed * 0.009);
+      const eastU = 0.84 + 0.035 * Math.cos(v * Math.PI * 2.1);
+      const westBand = Math.exp(-Math.pow((u - westU) / 0.10, 2));
+      const eastBand = Math.exp(-Math.pow((u - eastU) / 0.10, 2));
+      const westPeakMod = fbm(v * 2.7, seed * 0.011, seed + 661, 4);
+      const eastPeakMod = fbm(v * 2.5, seed * 0.012, seed + 443, 4);
+      const westTarget = (0.85 + 0.15 * westPeakMod) * wallsM;
+      const eastTarget = (0.85 + 0.15 * eastPeakMod) * wallsM;
+
+      // Valley floor: ramps origin → destination elevation with v, plus pinch
+      // (constriction) points where the floor rises toward valleyCeilingFt.
+      const tAlong = Math.min(1, Math.max(0, (v - 0.14) / 0.72));
+      const floorBase = originM + (destM - originM) * tAlong;
+      const constrict = fbm(v * 5.8, u * 0.4 + seed * 0.008, seed + 777, 3);
+      const pinch = Math.max(0, constrict - 0.48) * 2.0; // 0–1
+      const floorHeight = floorBase + (floorCeilM - floorBase) * pinch;
+
+      // Base mountain surface: rolling terrain up to ~55 % of wallsM everywhere.
+      let h = baseField * wallsM * 0.55;
+
+      // Lerp UP to wall-target height inside each wall band — produces prominent
+      // but naturally integrated wall chains (no artificial cliff edge).
+      h = h + westBand * Math.max(0, westTarget - h);
+      h = h + eastBand * Math.max(0, eastTarget - h);
+
+      // Valley bowl: pull height DOWN toward the floor where we're between the
+      // walls. Don't carve where a wall still dominates.
+      const valleyDist = Math.abs(u - 0.5);
+      const bowlFactor = Math.exp(-Math.pow(valleyDist / 0.22, 2));
+      const valleyBlend = bowlFactor * (1 - Math.max(westBand, eastBand));
+      h = h * (1 - valleyBlend * 0.92) + floorHeight * valleyBlend * 0.92;
+
+      // Airport basins
       const dO = Math.hypot(u - ox, v - oy);
       const dD = Math.hypot(u - dx, v - dy);
       const basinO = Math.exp(-Math.pow(dO / 0.08, 2));
       const basinD = Math.exp(-Math.pow(dD / 0.08, 2));
-      h = h * (1 - 0.92 * basinO) + originM * basinO;
-      h = h * (1 - 0.92 * basinD) + destM   * basinD;
-      h = Math.max(h, 500);
-      hm[j * N + i] = h;
+      h = h * (1 - 0.94 * basinO) + originM * basinO;
+      h = h * (1 - 0.94 * basinD) + destM   * basinD;
+
+      hm[j * N + i] = Math.max(h, 500);
     }
   }
   return {
