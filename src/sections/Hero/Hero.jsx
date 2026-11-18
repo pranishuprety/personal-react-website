@@ -8,6 +8,8 @@ import linkedinLight from '../../assets/linkedin-light.svg';
 import linkedinDark from '../../assets/linkedin-dark.svg';
 import emailLight from '../../assets/email-light.svg';
 import emailDark from '../../assets/email-dark.png';
+import devpostLight from '../../assets/devpost-light.svg';
+import devpostDark from '../../assets/devpost-dark.svg';
 import CV from '../../assets/cv.pdf';
 import { useTheme } from '../../common/ThemeContext';
 
@@ -18,6 +20,7 @@ function Hero() {
     const githubIcon = theme === 'light' ? githubLight : githubDark;
     const linkedinIcon = theme === 'light' ? linkedinLight : linkedinDark;
     const emailIcon = theme === 'light' ? emailLight : emailDark;
+    const devpostIcon = theme === 'light' ? devpostLight : devpostDark;
 
     return (
         <section id="hero" className={styles.container}>
@@ -41,6 +44,9 @@ function Hero() {
                     </a>
                     <a href="https://www.linkedin.com/in/pranish-uprety/" target="_blank">
                         <img src={linkedinIcon} alt="Linkedin icon" />
+                    </a>
+                    <a href="https://devpost.com/pranishuprety" target="_blank">
+                        <img src={devpostIcon} alt="Devpost icon" />
                     </a>
                 </span>
                 <p className={styles.description}>Caldwell University '27 | Loves to talk about aviation, CS, and web development | Fond of Chess</p>
