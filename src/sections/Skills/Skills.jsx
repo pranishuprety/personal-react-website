@@ -11,19 +11,34 @@ function Skills() {
 	return (
 		<section id="skills" className={styles.container}>
 			<h1 className="sectionTitle">Skills</h1>
+			<p className={styles.group}>Programming</p>
 			<div className={styles.skillList}>
-				<SkillList skill="HTML" icon={checkMarkIcon} />
-				<SkillList skill="CSS" icon={checkMarkIcon} />
-				<SkillList skill="JavaScript" icon={checkMarkIcon} />
 				<SkillList skill="Python" icon={checkMarkIcon} />
+				<SkillList skill="JavaScript" icon={checkMarkIcon} />
+				<SkillList skill="C" icon={checkMarkIcon} />
+				<SkillList skill="Matlab" icon={checkMarkIcon} />
+				<SkillList skill="C++" icon={checkMarkIcon} />
+				<SkillList skill="Ruby" icon={checkMarkIcon} />
+				<SkillList skill="R" icon={checkMarkIcon} />
 			</div>
 			<hr />
+			<p className={styles.group}>Web / Media</p>
 			<div className={styles.skillList}>
-				<SkillList skill="Django" icon={checkMarkIcon} />
-				<SkillList skill="React" icon={checkMarkIcon} />
+				<SkillList skill="HTML/CSS" icon={checkMarkIcon} />
+				<SkillList skill="jQuery" icon={checkMarkIcon} />
+				<SkillList skill="Bootstrap" icon={checkMarkIcon} />
 				<SkillList skill="Flask" icon={checkMarkIcon} />
+				<SkillList skill="Express" icon={checkMarkIcon} />
+				<SkillList skill="Git" icon={checkMarkIcon} />
+				<SkillList skill="Photoshop" icon={checkMarkIcon} />
 			</div>
 			<hr />
+			<p className={styles.group}>Databases</p>
+			<div className={styles.skillList}>
+				<SkillList skill="SQL" icon={checkMarkIcon} />
+				<SkillList skill="PostgreSQL" icon={checkMarkIcon} />
+				<SkillList skill="NoSQL" icon={checkMarkIcon} />
+			</div>
 		</section>
 	);
 }

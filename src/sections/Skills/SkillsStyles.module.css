@@ -14,13 +14,23 @@
 	}
 }
 
+.group {
+	font-family: 'Roboto Mono', monospace;
+	font-size: 14px;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	color: var(--footer-text-color);
+	margin-bottom: 20px;
+}
+
 .skillList {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
 	align-self: center;
 	flex-wrap: wrap;
-	row-gap: 40px;
-	max-width: 26ch;
+	gap: 20px 30px;
+	max-width: 70ch;
+	padding: 0 20px;
 }
 
 hr {

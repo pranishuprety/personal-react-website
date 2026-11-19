@@ -49,7 +49,7 @@ function Hero() {
                         <img src={devpostIcon} alt="Devpost icon" />
                     </a>
                 </span>
-                <p className={styles.description}>Caldwell University '27 | Loves to talk about aviation, CS, and web development | Fond of Chess</p>
+                <p className={styles.description}>Honors CS &amp; Maths at Caldwell University | Research Assistant at CogAI Lab | Aviation Enthusiast</p>
                 <a href={CV} download>
                     <button className="hover">Resume</button>
                 </a>

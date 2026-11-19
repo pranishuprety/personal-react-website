@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+	<style>
+		.trail { animation: flow 1.6s linear infinite; }
+		.plane { animation: float 3s ease-in-out infinite; }
+		@keyframes flow { to { stroke-dashoffset: -2.4; } }
+		@keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(0.5px, -0.5px); } }
+		@media (prefers-reduced-motion: reduce) { .trail, .plane { animation: none; } }
+	</style>
+	<path class="trail" d="M3 21 C 4 19.3, 5.3 18.1, 7.2 17.1" fill="none" stroke="#000" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="0.01 2.4"/>
+	<g class="plane">
+		<path transform="translate(13.4 10.6) rotate(45) scale(0.74) translate(-12 -12)" d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+	</g>
+</svg>

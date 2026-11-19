@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="512" height="512">
+	<style>
+		.bar1 { transform-origin: 6.6px 19.5px; animation: rise1 2.4s ease-in-out infinite; }
+		.bar2 { transform-origin: 12px 19.5px; animation: rise2 2.4s ease-in-out infinite 0.2s; }
+		.bar3 { transform-origin: 17.4px 19.5px; animation: rise3 2.4s ease-in-out infinite 0.4s; }
+		.trend { animation: flow 1.6s linear infinite; }
+		.arrow { animation: float 3s ease-in-out infinite; }
+		@keyframes rise1 {
+			0%, 100% { transform: scaleY(0.72); }
+			50% { transform: scaleY(1); }
+		}
+		@keyframes rise2 {
+			0%, 100% { transform: scaleY(0.78); }
+			50% { transform: scaleY(1); }
+		}
+		@keyframes rise3 {
+			0%, 100% { transform: scaleY(0.84); }
+			50% { transform: scaleY(1); }
+		}
+		@keyframes flow { to { stroke-dashoffset: -4; } }
+		@keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(0.4px, -0.5px); } }
+		@media (prefers-reduced-motion: reduce) {
+			.bar1, .bar2, .bar3, .trend, .arrow { animation: none; }
+		}
+	</style>
+	<path d="M3 19.5h18" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round"/>
+	<rect class="bar1" x="5" y="13" width="3.2" height="6.5" rx="0.6" fill="#000"/>
+	<rect class="bar2" x="10.4" y="9" width="3.2" height="10.5" rx="0.6" fill="#000"/>
+	<rect class="bar3" x="15.8" y="5" width="3.2" height="14.5" rx="0.6" fill="#000"/>
+	<path class="trend" d="M5.5 11.5 L10.5 8.2 L16 4.5" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.01 2.4"/>
+	<g class="arrow">
+		<path d="M14.2 4.2 L16.2 4.2 L16.2 6.2" fill="none" stroke="#000" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+	</g>
+</svg>
