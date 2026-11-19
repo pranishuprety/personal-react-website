@@ -7,7 +7,7 @@
 form {
 	display: flex;
 	flex-direction: column;
-	gap: 30px;
+	gap: 18px;
 }
 
 textarea,
@@ -20,7 +20,7 @@ input:not([type='submit']) {
 textarea {
 	padding-top: 16px;
 	resize: none;
-	height: 250px;
+	height: 160px;
 }
 
 input,
@@ -60,20 +60,27 @@ input[type='submit']:active {
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
 }
 
+input:focus-visible,
+textarea:focus-visible,
+input[type='submit']:focus-visible {
+	outline: 2px solid var(--btn-color);
+	outline-offset: 3px;
+}
+
 @media (width >= 900px) {
 	textarea,
 	input:not([type='submit']) {
-		width: 600px;
+		width: 520px;
 		font-size: 20px;
 	}
 	form {
-		gap: 40px;
+		gap: 22px;
 	}
 }
 
 @media (width >= 1400px) {
 	textarea,
 	input:not([type='submit']) {
-		width: 800px;
+		width: 640px;
 	}
 }

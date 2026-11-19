@@ -2,45 +2,73 @@
 	display: flex;
 	flex-direction: column;
 	text-align: center;
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
 
 	img,
-	.placeholder {
-		width: 250px;
-		height: 250px;
+	.placeholder,
+	.wordmark {
+		width: 100px;
+		height: 100px;
 		align-self: center;
-		background-color: var(--project-card-bg);
-		border-radius: 20px;
+		background-color: transparent;
+		border: none;
+		border-radius: 0;
+		object-fit: contain;
 	}
 
-	a {
+
+	a,
+	.cardPlain {
 		display: flex;
 		flex-direction: column;
-		flex: 0 0 280px;
-		gap: 5px;
+		flex: 0 0 260px;
+		gap: 8px;
 		text-decoration: none;
-		color: #222;
+		color: var(--text-color);
 		transition: transform 200ms ease-in-out;
 	}
 
 	a:hover {
-		transform: scale(1.05);
+		transform: scale(1.03);
+	}
+
+	a:focus-visible {
+		outline: 2px solid var(--btn-color);
+		outline-offset: 4px;
+		border-radius: 8px;
 	}
 
 	.card {
 		display: flex;
 		flex-direction: column;
-		flex: 0 0 280px;
+		flex: 0 0 min(420px, 78vw);
 		gap: 12px;
+		text-align: left;
 	}
 
-	.card a {
+	.cardMain {
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
 		flex: none;
+		width: 100%;
+		text-align: left;
+		color: var(--text-color);
+		text-decoration: none;
+	}
+
+	.cardMain img,
+	.cardMain .placeholder,
+	.cardMain .wordmark {
+		align-self: flex-start;
 	}
 
 	.links {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: center;
+		justify-content: flex-start;
 		gap: 10px;
 	}
 
@@ -69,12 +97,43 @@
 	}
 }
 
-.researchRow {
+.wordmark {
 	display: flex;
-	flex-wrap: wrap;
+	align-items: center;
 	justify-content: center;
-	gap: 40px;
+	box-sizing: border-box;
+	padding: 12px;
+	font-family: 'Rubik', sans-serif;
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1.2;
+	text-align: center;
+	color: #222;
+	border: 1px solid var(--footer-text-color);
+	background-color: var(--project-card-bg);
+}
+
+.researchRow {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 36px;
+	width: min(960px, calc(100% - 40px));
+	margin: 0 auto;
 	padding: 0 20px;
+	box-sizing: border-box;
+	text-align: left;
+}
+
+.researchRow .card {
+	flex: none;
+	width: 100%;
+}
+
+.researchRow img,
+.researchRow .placeholder,
+.researchRow .wordmark {
+	width: 96px;
+	height: 96px;
 }
 
 .placeholder {
@@ -82,11 +141,26 @@
 	border: 1px solid var(--footer-text-color);
 }
 
+.keepColor {
+	filter: none;
+}
+
+:global([data-theme='dark']) .container img:not(.keepColor) {
+	filter: invert(1);
+}
+
+.carouselShell {
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+}
+
 .projectsContainer {
 	display: flex;
-	gap: 30px;
-	width: 100vw;
-	padding: 15px 0;
+	gap: 28px;
+	width: 100%;
+	max-width: 100%;
+	padding: 12px 20px;
 	box-sizing: border-box;
 	overflow-x: auto;
 	scrollbar-width: none;
@@ -100,4 +174,32 @@
 
 .projectsContainer:active {
 	cursor: grabbing;
+}
+
+@media (width >= 900px) {
+	.container {
+		img,
+		.placeholder,
+		.wordmark {
+			width: 140px;
+			height: 140px;
+		}
+
+		a,
+		.cardPlain {
+			flex-basis: 280px;
+		}
+	}
+
+	.researchRow {
+		grid-template-columns: 1fr 1fr;
+		gap: 48px;
+	}
+
+	.researchRow img,
+	.researchRow .placeholder,
+	.researchRow .wordmark {
+		width: 120px;
+		height: 120px;
+	}
 }
