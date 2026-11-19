@@ -36,7 +36,7 @@ function Hero() {
                 </h1>
                 <h2>FullStack Developer</h2>
                 <span>
-                    <a href="mailto:pranishup642@gmail.com">
+                    <a href="mailto:pranishuprety7@gmail.com">
                         <img src={emailIcon} alt="Email icon" />
                     </a>
                     <a href="https://github.com/pranishuprety" target="_blank">
