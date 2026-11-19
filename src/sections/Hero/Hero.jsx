@@ -20,7 +20,7 @@ const ROTATING_TITLES = [
 	'UNDERGRADUATE RESEARCHER',
 	'TUTOR',
 	'AVIATION ENTHUSIAST',
-	'ASTRONOMY ENTHUSIAST',
+	'TEACHING ASSISTANT',
 ];
 
 function Hero() {
@@ -45,7 +45,7 @@ function Hero() {
 			window.setTimeout(() => {
 				setTitleIndex((current) => (current + 1) % ROTATING_TITLES.length);
 				setFadeIn(true);
-			}, 280);
+			}, 450);
 		}, 3500);
 
 		return () => clearInterval(interval);
@@ -70,7 +70,16 @@ function Hero() {
 					<br />
 					Uprety
 				</h1>
-				<h2 className={`${styles.subtitle} ${fadeIn ? styles.subtitleVisible : styles.subtitleHidden}`}>{subtitle}</h2>
+				<div className={styles.subtitleBlock}>
+					<h2 className={`${styles.subtitle} ${fadeIn ? styles.subtitleVisible : styles.subtitleHidden}`}>{subtitle}</h2>
+					{!reduceMotion && (
+						<div className={styles.subtitleDots} aria-hidden="true">
+							{ROTATING_TITLES.map((title, index) => (
+								<span key={title} className={index === titleIndex ? styles.dotActive : styles.dot} />
+							))}
+						</div>
+					)}
+				</div>
 				<span>
 					<a href="mailto:pranishuprety7@gmail.com" aria-label="Email">
 						<img src={emailIcon} alt="" />
