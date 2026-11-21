@@ -11,7 +11,6 @@ import emailLight from '../../assets/email-light.svg';
 import emailDark from '../../assets/email-dark.png';
 import devpostLight from '../../assets/devpost-light.svg';
 import devpostDark from '../../assets/devpost-dark.svg';
-import CV from '../../assets/cv.pdf';
 import { useTheme } from '../../common/ThemeContext';
 
 const ROTATING_TITLES = [
@@ -95,7 +94,7 @@ function Hero() {
 					</a>
 				</span>
 				<p className={styles.description}>Honors CS &amp; Maths at Caldwell University | Research Assistant at CogAI Lab | Aviation Enthusiast</p>
-				<a href={CV} download>
+				<a href="https://docs.google.com/document/d/1RcpJh30nqwbDKKD548Djydf2BK3Ug4JHNOTNO8Fpi7w/edit?usp=sharing" target="_blank" rel="noreferrer">
 					<button className="hover" type="button">
 						Resume
 					</button>
